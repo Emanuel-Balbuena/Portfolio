@@ -40,7 +40,7 @@ export default function RootLayout({
         <ThemeProvider>
           {/* Colocamos el Navbar fuera de <main> para que siempre esté arriba */}
           <Navbar />
-          <main className="flex flex-col min-h-[calc(100vh-3.5rem)]">
+          <main className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             {children}
           </main>
           <Footer />
