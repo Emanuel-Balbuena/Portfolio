@@ -1,4 +1,3 @@
-// components/command-menu.tsx
 "use client"
 
 import {
@@ -7,11 +6,12 @@ import {
     Settings,
     ShieldCheck,
     Terminal
-} from "lucide-react"
-import { useRouter } from "next/navigation"
-import * as React from "react"
+} from "lucide-react";
+import { useTheme } from "next-themes"; // <-- IMPORTANTE: Importamos el hook
+import { useRouter } from "next/navigation";
+import * as React from "react";
 
-import { Button } from "@/components/ui/button"; // <-- Importamos el botón
+import { Button } from "@/components/ui/button";
 import {
     Command,
     CommandEmpty,
@@ -21,23 +21,31 @@ import {
     CommandList,
     CommandSeparator,
     CommandShortcut,
-} from "@/components/ui/command"
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
+} from "@/components/ui/command";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 
 export function CommandMenu() {
     const [open, setOpen] = React.useState(false)
     const router = useRouter()
+    const { theme, setTheme } = useTheme() // <-- Consumimos el contexto del tema
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
+            // Atajo para abrir el menú (⌘K)
             if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
                 e.preventDefault()
                 setOpen((open) => !open)
             }
+            // NUEVO: Atajo para cambiar el tema (⌘T)
+            // Solo funciona si el usuario no está escribiendo en un input
+            if (e.key === "t" && e.altKey) {
+                e.preventDefault()
+                setTheme(theme === "dark" ? "light" : "dark")
+            }
         }
         document.addEventListener("keydown", down)
         return () => document.removeEventListener("keydown", down)
-    }, [])
+    }, [theme, setTheme]) // Añadimos dependencias por buenas prácticas
 
     const runCommand = (command: () => void) => {
         setOpen(false)
@@ -46,11 +54,6 @@ export function CommandMenu() {
 
     return (
         <>
-            {/* 
-        Convertimos el texto en un botón clickeable que parece un input de búsqueda.
-        Usamos clases de Tailwind para darle esa estética "Vercel": bordes sutiles, 
-        texto atenuado y un badge para el atajo de teclado.
-      */}
             <Button
                 variant="outline"
                 className="relative h-9 w-full justify-start rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none sm:pr-12 md:w-40 lg:w-64"
@@ -92,10 +95,11 @@ export function CommandMenu() {
                                     <span>Dotfiles & Entorno</span>
                                     <CommandShortcut>⌘D</CommandShortcut>
                                 </CommandItem>
-                                <CommandItem onSelect={() => runCommand(() => console.log("Cambiar a Dark Mode"))}>
+                                <CommandItem onSelect={() => runCommand(() => setTheme(theme === "dark" ? "light" : "dark"))}>
                                     <Settings className="mr-2 h-4 w-4" />
                                     <span>Alternar Tema</span>
-                                    <CommandShortcut>⌘T</CommandShortcut>
+                                    {/* Actualizamos la etiqueta visual */}
+                                    <CommandShortcut>Alt+T</CommandShortcut>
                                 </CommandItem>
                             </CommandGroup>
                         </CommandList>
