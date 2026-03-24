@@ -8,6 +8,14 @@ import { useState } from "react";
 
 // Importaciones de diseño consistentes con el inicio (shadcn/ui)
 import { Badge } from "@/components/ui/badge";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -80,13 +88,31 @@ export default function ProjectsPage() {
 
             {/* CABECERA Y CONTROLES */}
             <div className="w-full max-w-5xl flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-6 z-10">
-                <div>
-                    <h1 className="text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-slate-100 mb-2">
-                        Proyectos y Sistemas
-                    </h1>
-                    <p className="text-muted-foreground font-mono text-sm max-w-lg">
-                        // Un registro detallado de arquitecturas, experimentos y soluciones de ingeniería desarrolladas.
-                    </p>
+
+                <div className="flex flex-col gap-4">
+                    <Breadcrumb>
+                        <BreadcrumbList className="font-mono text-sm">
+                            <BreadcrumbItem>
+                                {/* asChild delega el renderizado al Link de Next.js */}
+                                <BreadcrumbLink asChild>
+                                    <Link href="/">Home</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>Proyectos</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+
+                    <div>
+                        <h1 className="text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-slate-100 mb-2">
+                            Proyectos y Sistemas
+                        </h1>
+                        <p className="text-muted-foreground font-mono text-sm max-w-lg">
+                            // Un registro detallado de arquitecturas, experimentos y soluciones de ingeniería desarrolladas.
+                        </p>
+                    </div>
                 </div>
 
                 <button
@@ -114,8 +140,8 @@ export default function ProjectsPage() {
                 {/* VISTA 1: LA LISTA DE PROYECTOS (ESTÉTICA CONSISTENTE, SIN IMAGEN) */}
                 <div
                     className={`flex flex-col gap-6 transition-all duration-700 absolute inset-0 w-full ${view === 'grid'
-                            ? "opacity-100 translate-y-0 pointer-events-auto relative"
-                            : "opacity-0 translate-y-8 pointer-events-none absolute"
+                        ? "opacity-100 translate-y-0 pointer-events-auto relative"
+                        : "opacity-0 translate-y-8 pointer-events-none absolute"
                         }`}
                 >
                     {PROJECTS.map((project) => {
@@ -172,8 +198,8 @@ export default function ProjectsPage() {
                 {/* origin-center es crucial para el colapso al punto */}
                 <div
                     className={`w-full origin-center relative z-20 ${isTerminalMounted
-                            ? (view === 'terminal' ? "crt-on pointer-events-auto" : "crt-off pointer-events-none absolute")
-                            : "opacity-0 pointer-events-none hidden"
+                        ? (view === 'terminal' ? "crt-on pointer-events-auto" : "crt-off pointer-events-none absolute")
+                        : "opacity-0 pointer-events-none hidden"
                         }`}
                 >
                     {/* Solo renderizamos el componente si isTerminalMounted es true.
