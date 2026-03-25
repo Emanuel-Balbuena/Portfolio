@@ -4,10 +4,15 @@
 // Asegúrate de que la ruta de importación coincida con donde guardaste el componente
 import { PowerLinkHero3D } from "@/components/projects/powerlink/hero-3d";
 import { IngestionLayout } from "@/components/projects/powerlink/ingest-layout";
+import { PowerLinkExecutive } from "./executive-summary";
 
 export function PowerLinkDetail() {
     return (
         <div className="flex flex-col gap-16 pb-20 animate-in fade-in duration-700">
+            {/* ACTO 0: Resumen Ejecutivo */}
+            <section>
+                <PowerLinkExecutive />
+            </section>
 
             {/* ACTO I: El Origen Físico (Modelo 3D Interactuable) */}
             <section>

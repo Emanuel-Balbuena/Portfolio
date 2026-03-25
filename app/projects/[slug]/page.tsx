@@ -15,7 +15,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const projectComponents: Record<string, React.ComponentType> = {
-    "powerlink": PowerLinkDetail,
+    "PowerLink": PowerLinkDetail,
 };
 
 export async function generateStaticParams() {

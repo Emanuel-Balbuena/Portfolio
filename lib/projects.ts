@@ -19,12 +19,12 @@ export type Project = {
 export const PROJECTS: Project[] = [
     {
         id: "prj-1",
-        name: "powerlink",
-        title: "Powerlink IoT Architecture",
+        name: "PowerLink",
+        title: "PowerLink",
         desc: "Sistema de monitoreo eléctrico con ESP32 y sensores PZEM-004t.",
-        longDesc: "Un gateway de alto rendimiento que enruta tráfico de microservicios con autenticación JWT nativa y rate-limiting basado en Redis. Implementación de medidas de ciberseguridad.",
-        techStack: ["IoT", "Hardware", "Security", "Go"],
-        link: "https://github.com/tu-usuario/powerlink",
+        longDesc: "Ecosistema IoT domótico diseñado para mitigar el gasto energético oculto y predecir costos en tiempo real. Una arquitectura End-to-End que abarca desde el diseño de hardware (ESP32) y firmware resiliente en C++, hasta un dashboard serverless (Next.js/Supabase) con control global e integración nativa de voz vía Alexa.",
+        techStack: ["IoT", "Hardware", "Security"],
+        link: "https://github.com/Emanuel-Balbuena/PowerLink-2.git",
         imageUrl: "/images/ft-powerlink.png",
         status: "production",
         featured: true, // <--- Este aparecerá en el inicio
