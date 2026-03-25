@@ -141,9 +141,9 @@ export function PowerLinkExecutive() {
             </div>
 
             {/* Puente hacia la Ingeniería */}
-            <div className="flex flex-col items-center justify-center text-center mt-4 mb-24 opacity-80">
+            <div className="flex flex-col items-center justify-center text-center mt-4 mb-8 opacity-80">
                 <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-2">Descubre la arquitectura interna</p>
-                <div className="w-[2px] h-25 bg-gradient-to-b from-border to-transparent"></div>
+                <div className="w-[2px] h-24 bg-gradient-to-b from-border to-transparent"></div>
             </div>
 
         </div>
