@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cpu, ExternalLink, Github, Layers, Mic, ShieldCheck, TrendingDown, Zap } from "lucide-react";
+import { Cpu, ExternalLink, Eye, Github, Layers, Mic, ShieldCheck, TrendingDown, Zap } from "lucide-react";
 
 export function PowerLinkExecutive() {
     return (
@@ -45,7 +45,7 @@ export function PowerLinkExecutive() {
                             </CardTitle>
                             {/* Unificado a text-base y con un margin-top sutil */}
                             <CardDescription className="text-base text-muted-foreground leading-relaxed mt-2">
-                                El consumo eléctrico es un gasto ciego. Las personas reciben facturas sin saber qué electrodoméstico drena su dinero.
+                                El consumo eléctrico es un gasto ciego. Las personas reciben facturas sin saber qué electrodoméstico drena su dinero, careciendo de herramientas para auditar su consumo o proteger sus equipos de variaciones.
                             </CardDescription>
                         </CardHeader>
                     </Card>
@@ -60,6 +60,9 @@ export function PowerLinkExecutive() {
 
                     <Card className="z-10 h-full bg-background/80 backdrop-blur-sm border-border group-hover:border-foreground/20 transition-all duration-300 shadow-sm relative group-hover:scale-[1.01] overflow-hidden flex flex-col">
                         <CardHeader className="pt-6 pb-4">
+                            <div className="w-10 h-10 rounded-full flex items-center justify-center mb-4 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 shrink-0">
+                                <Eye className="w-5 h-5" />
+                            </div>
                             <CardTitle className="font-sans text-xl font-bold tracking-tight group-hover:text-blue-400 transition-colors">
                                 Hacer visible lo invisible.
                             </CardTitle>
@@ -140,7 +143,7 @@ export function PowerLinkExecutive() {
             {/* Puente hacia la Ingeniería */}
             <div className="flex flex-col items-center justify-center text-center mt-4 mb-24 opacity-80">
                 <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-2">Descubre la arquitectura interna</p>
-                <div className="w-[1px] h-16 bg-gradient-to-b from-border to-transparent"></div>
+                <div className="w-[2px] h-25 bg-gradient-to-b from-border to-transparent"></div>
             </div>
 
         </div>
