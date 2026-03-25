@@ -3,6 +3,7 @@
 
 // Asegúrate de que la ruta de importación coincida con donde guardaste el componente
 import { PowerLinkHero3D } from "@/components/projects/powerlink/hero-3d";
+import { IngestionLayout } from "@/components/projects/powerlink/ingest-layout";
 
 export function PowerLinkDetail() {
     return (
@@ -11,6 +12,11 @@ export function PowerLinkDetail() {
             {/* ACTO I: El Origen Físico (Modelo 3D Interactuable) */}
             <section>
                 <PowerLinkHero3D />
+            </section>
+
+            {/* ACTO II: La Arquitectura de Datos (Scrollytelling) */}
+            <section className="w-full">
+                <IngestionLayout />
             </section>
 
             {/* Placeholder temporal para el Acto II */}

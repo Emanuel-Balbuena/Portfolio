@@ -1,3 +1,5 @@
+// app/projects/page.tsx
+
 "use client";
 
 import { TerminalWindow } from "@/components/terminal-window";

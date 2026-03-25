@@ -1,4 +1,5 @@
 // app/projects/[slug]/page.tsx
+
 import { PowerLinkDetail } from "@/components/projects/powerlink/powerlink-detail";
 import { Badge } from "@/components/ui/badge";
 import {

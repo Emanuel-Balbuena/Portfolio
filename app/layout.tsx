@@ -1,3 +1,5 @@
+// app/layout.tsx
+
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar"; // <-- Importamos nuestro Navbar
 import { ThemeProvider } from "@/components/theme-provider";
@@ -40,7 +42,7 @@ export default function RootLayout({
         <ThemeProvider>
           {/* Colocamos el Navbar fuera de <main> para que siempre esté arriba */}
           <Navbar />
-          <main className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+          <main className="relative flex min-h-screen w-full flex-col overflow-x-clip">
             {children}
           </main>
           <Footer />
