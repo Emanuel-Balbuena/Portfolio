@@ -146,34 +146,40 @@ export function PowerLinkArchitecture() {
                 {/* ========================================== */}
                 <TabsContent value="edge" className="flex flex-col gap-6 outline-none">
 
-                    {/* 2. Solución Móvil: Scroll Horizontal Oculto (Carrusel) */}
-                    <div className="flex flex-row items-center justify-start md:justify-center min-h-[250px] border border-border rounded-2xl bg-card/20 relative overflow-x-auto snap-x snap-mandatory px-4 md:px-8 py-8 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    {/* Contenedor Padre: Fijo, dibuja el borde, la cuadrícula y asegura el tamaño mínimo */}
+                    <div className="relative flex flex-col items-center justify-center min-h-[250px] w-full border border-border rounded-2xl bg-card/20 overflow-hidden">
+                        {/* La Cuadrícula de Fondo (Estática) */}
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
-                        <div className="relative z-10 flex flex-row items-center gap-4 md:gap-8 min-w-max px-4">
-                            {ARCHITECTURE_DATA.edge.map((node, index) => {
-                                const isActive = selectedEdgeNode?.id === node.id;
-                                return (
-                                    <div key={node.id} className="flex flex-row items-center gap-4 md:gap-8 shrink-0 snap-center">
+                        {/* El Carrusel (Flota encima de la cuadrícula, hace el scroll horizontal) */}
+                        <div className="relative z-10 flex flex-row items-center justify-start md:justify-center overflow-x-auto snap-x snap-mandatory w-full py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
-                                        <button
-                                            onClick={() => setSelectedEdgeNode(node)}
-                                            className={`flex flex-col items-center justify-center p-4 w-40 h-32 rounded-xl border backdrop-blur-sm transition-all duration-300 relative overflow-hidden group focus:outline-none ${isActive
-                                                ? "border-blue-500/50 bg-blue-500/10 scale-105 shadow-[0_0_20px_rgba(16,185,129,0.15)]"
-                                                : "border-border bg-card/50 hover:border-blue-500/30 hover:bg-blue-500/5"
-                                                }`}
-                                        >
-                                            <node.icon className={`w-8 h-8 mb-3 transition-colors ${isActive ? "text-blue-500" : "text-muted-foreground group-hover:text-blue-400"}`} />
-                                            <span className={`text-sm font-medium text-center leading-tight ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{node.title}</span>
-                                        </button>
+                            {/* Inner wrapper para forzar el ancho y el padding lateral en el scroll */}
+                            <div className="flex flex-row items-center gap-4 md:gap-8 min-w-max px-6 md:px-0 mx-auto">
+                                {ARCHITECTURE_DATA.edge.map((node, index) => {
+                                    const isActive = selectedEdgeNode?.id === node.id;
+                                    return (
+                                        <div key={node.id} className="flex flex-row items-center gap-4 md:gap-8 shrink-0 snap-center">
 
-                                        {/* Las flechas ahora SIEMPRE apuntan a la derecha, incluso en móvil */}
-                                        {index < ARCHITECTURE_DATA.edge.length - 1 && (
-                                            <ArrowRight className="w-6 h-6 text-muted-foreground/40 shrink-0" />
-                                        )}
-                                    </div>
-                                );
-                            })}
+                                            <button
+                                                onClick={() => setSelectedEdgeNode(node)}
+                                                className={`flex flex-col items-center justify-center p-4 w-40 h-32 rounded-xl border backdrop-blur-sm transition-all duration-300 relative overflow-hidden group focus:outline-none ${isActive
+                                                    ? "border-blue-500/50 bg-blue-500/10 scale-105 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                                                    : "border-border bg-card/50 hover:border-blue-500/30 hover:bg-blue-500/5"
+                                                    }`}
+                                            >
+                                                <node.icon className={`w-8 h-8 mb-3 transition-colors ${isActive ? "text-blue-500" : "text-muted-foreground group-hover:text-blue-400"}`} />
+                                                <span className={`text-sm font-medium text-center leading-tight ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{node.title}</span>
+                                            </button>
+
+                                            {/* Flecha conectora */}
+                                            {index < ARCHITECTURE_DATA.edge.length - 1 && (
+                                                <ArrowRight className="w-6 h-6 text-muted-foreground/40 shrink-0" />
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
 
@@ -185,32 +191,39 @@ export function PowerLinkArchitecture() {
                 {/* ========================================== */}
                 <TabsContent value="cloud" className="flex flex-col gap-6 outline-none">
 
-                    <div className="flex flex-row items-center justify-start md:justify-center min-h-[250px] border border-border rounded-2xl bg-card/20 relative overflow-x-auto snap-x snap-mandatory px-4 md:px-8 py-8 w-full [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    {/* Contenedor Padre: Fijo */}
+                    <div className="relative flex flex-col items-center justify-center min-h-[250px] w-full border border-border rounded-2xl bg-card/20 overflow-hidden">
+                        {/* La Cuadrícula de Fondo (Estática) */}
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
 
-                        <div className="relative z-10 flex flex-row items-center gap-4 md:gap-8 min-w-max px-4">
-                            {ARCHITECTURE_DATA.cloud.map((node, index) => {
-                                const isActive = selectedCloudNode?.id === node.id;
-                                return (
-                                    <div key={node.id} className="flex flex-row items-center gap-4 md:gap-8 shrink-0 snap-center">
+                        {/* El Carrusel */}
+                        <div className="relative z-10 flex flex-row items-center justify-start md:justify-center overflow-x-auto snap-x snap-mandatory w-full py-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
-                                        <button
-                                            onClick={() => setSelectedCloudNode(node)}
-                                            className={`flex flex-col items-center justify-center p-4 w-40 h-32 rounded-xl border backdrop-blur-sm transition-all duration-300 relative overflow-hidden group focus:outline-none ${isActive
-                                                ? "border-blue-500/50 bg-blue-500/10 scale-105 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
-                                                : "border-border bg-card/50 hover:border-blue-500/30 hover:bg-blue-500/5"
-                                                }`}
-                                        >
-                                            <node.icon className={`w-8 h-8 mb-3 transition-colors ${isActive ? "text-blue-500" : "text-muted-foreground group-hover:text-blue-400"}`} />
-                                            <span className={`text-sm font-medium text-center leading-tight ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{node.title}</span>
-                                        </button>
+                            {/* Inner wrapper */}
+                            <div className="flex flex-row items-center gap-4 md:gap-8 min-w-max px-6 md:px-0 mx-auto">
+                                {ARCHITECTURE_DATA.cloud.map((node, index) => {
+                                    const isActive = selectedCloudNode?.id === node.id;
+                                    return (
+                                        <div key={node.id} className="flex flex-row items-center gap-4 md:gap-8 shrink-0 snap-center">
 
-                                        {index < ARCHITECTURE_DATA.cloud.length - 1 && (
-                                            <ArrowRight className="w-6 h-6 text-muted-foreground/40 shrink-0" />
-                                        )}
-                                    </div>
-                                );
-                            })}
+                                            <button
+                                                onClick={() => setSelectedCloudNode(node)}
+                                                className={`flex flex-col items-center justify-center p-4 w-40 h-32 rounded-xl border backdrop-blur-sm transition-all duration-300 relative overflow-hidden group focus:outline-none ${isActive
+                                                    ? "border-blue-500/50 bg-blue-500/10 scale-105 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+                                                    : "border-border bg-card/50 hover:border-blue-500/30 hover:bg-blue-500/5"
+                                                    }`}
+                                            >
+                                                <node.icon className={`w-8 h-8 mb-3 transition-colors ${isActive ? "text-blue-500" : "text-muted-foreground group-hover:text-blue-400"}`} />
+                                                <span className={`text-sm font-medium text-center leading-tight ${isActive ? "text-foreground" : "text-muted-foreground"}`}>{node.title}</span>
+                                            </button>
+
+                                            {index < ARCHITECTURE_DATA.cloud.length - 1 && (
+                                                <ArrowRight className="w-6 h-6 text-muted-foreground/40 shrink-0" />
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
 
