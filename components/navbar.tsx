@@ -133,11 +133,11 @@ export function Navbar() {
                   <Link href="/projects" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
                     Proyectos
                   </Link>
-                  <Link href="/about" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
-                    Sobre mí
-                  </Link>
                   <Link href="/blog" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
                     Bitácora
+                  </Link>
+                  <Link href="/about" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
+                    Sobre mí
                   </Link>
                   <Link href="/contact" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
                     Contacto

@@ -1,5 +1,16 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link"; // Importación del Link de Next.js
+
+// Importaciones del componente Breadcrumb de shadcn/ui
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
     title: "Sobre Mí | Ingeniero de Software & UI/UX",
@@ -14,11 +25,25 @@ export default function AboutPage() {
             {/* Inner Wrapper */}
             <article className="w-full max-w-5xl flex flex-col gap-10 md:gap-14">
 
-                {/* 1. Cambio aquí: Quitamos 'flex-col-reverse' y dejamos solo 'flex-col' 
-                  para que el título quede arriba y la foto abajo en móviles.
-                */}
+                {/* Encabezado y Fotografía */}
                 <header className="flex flex-col md:flex-row items-start gap-8 justify-between">
                     <div className="flex flex-col gap-4 max-w-2xl">
+
+                        {/* BREADCRUMB: Implementado exactamente igual que en /projects */}
+                        <Breadcrumb>
+                            <BreadcrumbList className="font-mono text-sm">
+                                <BreadcrumbItem>
+                                    <BreadcrumbLink asChild>
+                                        <Link href="/">Home</Link>
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator />
+                                <BreadcrumbItem>
+                                    <BreadcrumbPage>Sobre Mí</BreadcrumbPage>
+                                </BreadcrumbItem>
+                            </BreadcrumbList>
+                        </Breadcrumb>
+
                         <h1 className="text-3xl md:text-4xl font-bold tracking-tight font-sans text-foreground">
                             Ingeniería de software con precisión de diseño.
                         </h1>
@@ -27,11 +52,7 @@ export default function AboutPage() {
                         </p>
                     </div>
 
-                    {/* 2. Cambios aquí: 
-                      - w-48 h-48: Más grande en móvil para imitar el peso visual de la referencia.
-                      - self-center: Lo centra solo en móvil.
-                      - md:self-start: Restaura el comportamiento en escritorio.
-                    */}
+                    {/* Contenedor de Fotografía */}
                     <div className="relative w-48 h-48 sm:w-40 sm:h-40 self-center md:self-start shrink-0 rounded-2xl overflow-hidden border border-border shadow-sm group">
                         <Image
                             src="/images/ciervo.jpeg"

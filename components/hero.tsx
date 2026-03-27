@@ -4,7 +4,7 @@ import Link from "next/link";
 export function Hero() {
   return (
     // Se añade 'w-full' a la etiqueta section para romper el límite del contenedor flex
-<section className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden border-b border-border pt-14">      
+    <section className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden border-b border-border pt-14">
       {/* Glow Ambiental - Ahora se expandirá por toda la pantalla */}
       <div className="absolute inset-0 w-full h-full pointer-events-none -z-10">
         <div className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-blue-600/15 dark:bg-blue-600/10 rounded-full blur-[120px]" />
@@ -25,21 +25,21 @@ export function Hero() {
             Arquitectura y código <br className="hidden md:block" /> con precisión técnica.
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-sans leading-relaxed">
-            Desarrollo interfaces de alta ingeniería y sistemas escalables. 
+            Desarrollo interfaces de alta ingeniería y sistemas escalables.
             Priorizando rendimiento, accesibilidad y diseño bimodal.
           </p>
         </div>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 pt-8">
-          <Button asChild size="lg" className="h-12 px-8 shadow-sm">
+          {/*<Button asChild size="lg" className="h-12 px-8 shadow-sm">
             <Link href="/projects">
               Explorar Sistemas
             </Link>
-          </Button>
+          </Button>*/}
           <Button asChild size="lg" variant="outline" className="h-12 px-8 bg-background/50 backdrop-blur-sm border-border">
-            <Link href="/blog">
-              Leer Bitácora
+            <Link href="/projects">
+              Explorar Proyectos
             </Link>
           </Button>
         </div>
