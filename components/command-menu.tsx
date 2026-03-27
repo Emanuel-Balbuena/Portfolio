@@ -68,7 +68,14 @@ export function CommandMenu() {
             </Button>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogContent className="overflow-hidden p-0 shadow-lg border-border">
+                <DialogContent 
+                    className="overflow-hidden p-0 shadow-lg border-border"
+                    onOpenAutoFocus={(e) => {
+                        if (window.innerWidth < 768) {
+                            e.preventDefault();
+                        }
+                    }}
+                >
                     <DialogTitle className="sr-only">Paleta de Comandos</DialogTitle>
                     <DialogDescription className="sr-only">
                         Navega por el portafolio, proyectos y configuraciones del sistema.

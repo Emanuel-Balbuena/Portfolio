@@ -49,8 +49,10 @@ useGLTF.preload("/models/esp32.glb");
 // 3. COMPONENTE PRINCIPAL
 export function PowerLinkHero3D() {
     const globalMouse = useRef({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // NUEVO ESTADO: Rastreador de dispositivo móvil
+    // NUEVO ESTADO: Rastreadores de optimización e interfaz
+    const [isVisible, setIsVisible] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -63,6 +65,18 @@ export function PowerLinkHero3D() {
         // Rastreador de redimensionamiento de ventana
         window.addEventListener("resize", checkMobile);
 
+        // Observador de visibilidad (Intersection Observer para optimización GPU/CPU)
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { rootMargin: "100px" } // Margen para despertar el canvas antes de ser visible
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
         // Rastreador del ratón (Parallax)
         const handleMouseMove = (e: MouseEvent) => {
             globalMouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -74,11 +88,12 @@ export function PowerLinkHero3D() {
         return () => {
             window.removeEventListener("resize", checkMobile);
             window.removeEventListener("mousemove", handleMouseMove);
+            observer.disconnect();
         };
     }, []);
 
     return (
-        <div className="relative w-full h-[55vh] min-h-[500px] md:h-[75vh] rounded-xl overflow-hidden border border-border bg-gradient-to-b from-muted/20 to-background flex items-center justify-center">
+        <div ref={containerRef} className="relative w-full h-[55vh] min-h-[500px] md:h-[75vh] rounded-xl overflow-hidden border border-border bg-gradient-to-b from-muted/20 to-background flex items-center justify-center">
 
             {/* CAPA HTML/UI */}
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-16 md:pt-20 pointer-events-none text-center px-4">
@@ -95,8 +110,12 @@ export function PowerLinkHero3D() {
             </div>
 
             {/* CAPA WEBGL */}
-            <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto">
-                <Canvas camera={{ position: [0, 0, 4.5], fov: 45 }} dpr={[1, 2]}>
+            <div className="absolute inset-0 z-0 pointer-events-none lg:pointer-events-auto touch-none">
+                <Canvas 
+                    frameloop={isVisible ? "always" : "demand"}
+                    camera={{ position: [0, 0, 4.5], fov: 45 }} 
+                    dpr={[1, 2]}
+                >
                     <ambientLight intensity={0.5} />
                     <Environment preset="city" />
 
