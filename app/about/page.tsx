@@ -94,7 +94,7 @@ export default function AboutPage() {
 
                     <div className="flex flex-col gap-10 mt-4">
                         <ExperienceItem
-                            company="Proyecto PowerLink"
+                            company="PowerLink"
                             role="Lead Frontend Engineer"
                             period="2023 — Presente"
                             description="Desarrollo de interfaces de alta fidelidad para el monitoreo de hardware IoT en tiempo real. Implementación de modelos 3D interactivos, arquitecturas modulares y visualización de topologías de red priorizando el rendimiento a 60fps."
@@ -116,9 +116,9 @@ function ExperienceItem({ company, role, period, description }: {
             <div className="text-sm font-mono text-muted-foreground md:pt-1">{period}</div>
 
             <div className="flex flex-col gap-2">
-                <h3 className="text-xl font-semibold text-foreground font-sans transition-colors group-hover:text-blue-500">
+                <Link href={`/projects/${company.replace(" ", "-")}`} className="text-xl font-semibold text-foreground font-sans transition-colors group-hover:text-blue-500">
                     {company}
-                </h3>
+                </Link>
                 <p className="text-sm font-mono text-muted-foreground uppercase tracking-wide">{role}</p>
                 <p className="text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 font-sans mt-2">
                     {description}

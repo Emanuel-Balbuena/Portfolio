@@ -79,13 +79,6 @@ export function Navbar() {
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/contact" className="px-4 py-2 text-sm font-medium transition-colors rounded-md hover:bg-foreground/10">
-                      Contacto
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
@@ -138,9 +131,6 @@ export function Navbar() {
                   </Link>
                   <Link href="/about" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
                     Sobre mí
-                  </Link>
-                  <Link href="/contact" className="flex items-center px-4 py-3 text-lg font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-md transition-all" onClick={() => setIsOpen(false)}>
-                    Contacto
                   </Link>
                 </div>
               </SheetContent>

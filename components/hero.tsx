@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export function Hero() {
   return (
-    // CAMBIO AQUÍ: Añadimos pb-20 (móvil) y md:pb-32 (escritorio) para garantizar el "breathing room"
-    <section className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden border-b border-border pt-14 pb-20 md:pb-32">
+    // CAMBIO AQUÍ: Añadimos pb-20 (móvil) y md:pb-10 (escritorio) para garantizar el "breathing room"
+    <section className="relative w-full flex-1 flex flex-col items-center justify-center overflow-hidden border-b border-border pt-14 pb-20 md:pb-10">
       {/* Glow Ambiental */}
       <div className="absolute inset-0 w-full h-full pointer-events-none -z-10">
         <div className="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-blue-600/15 dark:bg-blue-600/10 rounded-full blur-[120px]" />
