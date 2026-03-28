@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Terminal } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
 export function Footer() {
@@ -9,7 +9,6 @@ export function Footer() {
         {/* Sección Izquierda: Branding y Copyright */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-2 font-mono font-semibold tracking-tighter">
-            <Terminal className="size-4 text-blue-500" />
             <span>~/ciervo</span>
           </div>
           <p className="text-sm text-muted-foreground font-sans">

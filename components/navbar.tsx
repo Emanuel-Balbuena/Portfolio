@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { Menu, Terminal } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import * as React from "react";
 
@@ -117,7 +117,6 @@ export function Navbar() {
               <SheetContent side="left" className="w-[300px] sm:w-[400px] border-r border-border bg-background/95 backdrop-blur-md px-6">
                 <SheetHeader className="pb-6 border-b border-border pt-4">
                   <SheetTitle className="font-mono tracking-tighter text-left flex items-center gap-2">
-                    <Terminal className="size-4 text-blue-500" />
                     ~/ciervo
                   </SheetTitle>
                 </SheetHeader>

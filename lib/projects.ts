@@ -28,8 +28,10 @@ export const PROJECTS: Project[] = [
         imageUrl: "/images/ft-powerlink.png",
         status: "production",
         featured: true, // <--- Este aparecerá en el inicio
-    },
-    {
+    }
+
+    //Proyectos en proceso
+    /*{
         id: "prj-2",
         name: "arch-env",
         title: "Arch Linux Setup",
@@ -58,5 +60,5 @@ export const PROJECTS: Project[] = [
         longDesc: "Un portafolio interactivo que simula una terminal TTY completa con comandos, historial y autocompletado nativo.",
         techStack: ["Next.js", "React", "Tailwind CSS"],
         status: "production",
-    }
+    }*/
 ];
