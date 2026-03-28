@@ -1,6 +1,6 @@
 ---
 title: "Evolución técnica: Un recorrido arquitectónico por mis proyectos"
-date: "2026-03-27"
+date: "2026-03-27T13:00"
 summary: "Reflexiones sobre mi trayectoria en el desarrollo de software, desde aplicaciones de escritorio académicas hasta arquitecturas IoT complejas con integración de voz."
 ---
 
