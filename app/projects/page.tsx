@@ -173,7 +173,7 @@ export default function ProjectsPage() {
                                                 </Badge>
                                             </div>
                                             <CardDescription className="text-base text-muted-foreground leading-relaxed mt-2 max-w-4xl">
-                                                {project.longDesc}
+                                                {project.desc}
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent className="pb-5 pt-auto mt-auto flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">

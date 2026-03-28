@@ -1,0 +1,13 @@
+---
+title: "Evolución técnica: Un recorrido arquitectónico por mis proyectos"
+date: "2026-03-27"
+summary: "Reflexiones sobre mi trayectoria en el desarrollo de software, desde aplicaciones de escritorio académicas hasta arquitecturas IoT complejas con integración de voz."
+---
+
+Cuando comencé a programar, aproximadamente en 2022, inicié mi camino con un software llamado `PawLink`. Lo desarrollé en `Java` utilizando `SceneBuilder`. El programa consistía en una aplicación de escritorio diseñada para facilitar la conexión entre veterinarias, refugios y usuarios de mi localidad. Tenía una serie de funciones interesantes; sin embargo, en esa etapa inicial aún no contaba con un conocimiento técnico profundo y, lo más importante, lo consideraba puramente como un proyecto académico.
+
+El resultado de esa primera iteración no me pareció suficiente. Sentía que `SceneBuilder` limitaba mis posibilidades y no me otorgaba el control total sobre la interfaz. Por ello, en cuanto obtuve una calificación aprobatoria, decidí refactorizar todo el programa y migrarlo de `Java` a `JavaScript` (`JS`). Este proceso lo llevé a cabo con la asistencia de una `IA` que, en aquel entonces, aún era bastante prematura. Este proyecto fundacional me proporcionó el conocimiento técnico necesario para escalar hacia sistemas más complejos y sigue siendo una de mis experiencias de aprendizaje favoritas.
+
+Posteriormente, desarrollé de la forma más profesional posible un gestor de tickets llamado `NetworkLink` (construido en `JS`). Este sistema ya integraba una base de datos pequeña, pero estructuralmente sólida, y consumía una `API` desarrollada en `PHP`. A pesar de ser un software relativamente sencillo, me permitió comprender que apenas estaba rascando la superficie del desarrollo web. Lamentablemente, perdí el código fuente porque en esa época aún no implementaba control de versiones con `GitHub`. Sin embargo, no considero que sea una pérdida grave, ya que hoy en día poseo la madurez técnica para replicarlo con una arquitectura muy superior y sin complicaciones.
+
+A día de hoy, uno de mis sistemas más ambiciosos y completos es `PowerLink`, un proyecto en el que llevo trabajando un año entero. Su desarrollo ha sido una clase magistral continua: he integrado servicios en la nube como `Supabase` y `Vercel`, y he descendido a nivel de hardware utilizando electrónica pura y `C++` para la programación del `Firmware`. Continúo iterando constantemente sobre este ecosistema, y puedo afirmar que uno de los hitos técnicos más emocionantes fue desarrollar la integración con los servicios de `Alexa`, lo que me permite consultar telemetría en tiempo real y ejecutar comandos físicos directamente mediante voz.
