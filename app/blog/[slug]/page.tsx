@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                             </BreadcrumbList>
                         </Breadcrumb>
 
-                        <h1 className="text-5xl md:text-5xl font-bold tracking-tight font-sans text-foreground">
+                        <h1 className="text-3xl md:text-4xl font-bold tracking-tight font-sans text-foreground">
                             {post.title}
                         </h1>
                         <div className="flex items-center gap-2 text-muted-foreground font-mono text-sm uppercase tracking-widest">
