@@ -26,6 +26,10 @@ export const metadata = {
   description: "Portafolio personal.",
 };
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'es' }];
+}
+
 export default async function RootLayout({
   children,
   params,
