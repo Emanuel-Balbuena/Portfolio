@@ -1,0 +1,236 @@
+{
+  "Index": {
+    "title": "¡Hola mundo!"
+  },
+  "Navigation": {
+    "projects": "Proyectos",
+    "blog": "Bitácora",
+    "about": "Sobre mí"
+  },
+  "CommandMenu": {
+    "search": "Buscar comandos...",
+    "searchShort": "Buscar...",
+    "placeholder": "Escribe un comando o busca algo...",
+    "empty": "No se encontraron resultados.",
+    "navHeading": "Navegación",
+    "navHome": "Inicio",
+    "navAbout": "Sobre Mí",
+    "navProjects": "Ver Proyectos",
+    "actionsHeading": "Acciones Rápidas",
+    "actionEmail": "Copiar Email",
+    "actionLink": "Copiar Enlace Actual",
+    "projectsHeading": "Proyectos",
+    "socialHeading": "Redes & Contacto",
+    "preferencesHeading": "Preferencias",
+    "themeToggle": "Alternar Tema",
+    "languageToggle": "Switch to English",
+    "toastEmail": "Correo copiado al portapapeles",
+    "toastEmailDesc": "¡Hablemos de tu próximo proyecto!",
+    "toastLink": "Enlace copiado al portapapeles",
+    "toastLinkDesc": "¡Listo para compartir!",
+    "toastError": "Error de acceso",
+    "toastErrorDesc": "No se pudo acceder al portapapeles."
+  },
+  "Hero": {
+    "badgeRole": "Ingeniería de Sistemas & Frontend",
+    "title1": "Arquitectura y código",
+    "title2": "con precisión técnica.",
+    "description": "Desarrollo interfaces de alta ingeniería y sistemas escalables. Priorizando rendimiento, accesibilidad y diseño bimodal.",
+    "ctaExplore": "Explorar Proyectos"
+  },
+  "Footer": {
+    "copyright": "Construido con precisión técnica."
+  },
+  "Connect": {
+    "title": "Iniciemos un sistema.",
+    "description": "Siempre abierto a discutir nuevas arquitecturas, integraciones complejas o roles donde la ingeniería y el diseño convergen.",
+    "copyBtn": "Copiar",
+    "copiedBtn": "Copiado",
+    "toastCopySuccess": "Correo copiado al portapapeles",
+    "toastCopySuccessDesc": "¡Hablemos de tu próximo proyecto!",
+    "toastCopyError": "Error de acceso",
+    "toastCopyErrorDesc": "No se pudo acceder al portapapeles. Intenta seleccionarlo manualmente."
+  },
+  "TechStack": {
+    "heading": "// Entornos y Tecnologías Dominadas"
+  },
+  "Projects": {
+    "heading": "Sistemas Destacados",
+    "subheading": "// Seleccionados por complejidad técnica y arquitectura.",
+    "status": {
+      "production": "En Producción",
+      "maintenance": "Mantenimiento",
+      "paused": "Pausado",
+      "closed": "Cerrado"
+    }
+  },
+  "TerminalStory": {
+    "step_init_0": "> _ sys: Inicializando módulo de telemetría...",
+    "step_init_1": "> _ sys: [STANDBY] Esperando enlace de datos (Scroll hacia abajo para iniciar)...",
+    "step_0_0": "> _ uart: TX -> F8 04 00 00 00 0A 64 64",
+    "step_0_1": "> _ uart: RX <- F8 04 14 09 4B 00 00 00 8C 00 00 00 00 01 F4 00 64 00 00 00 00 E5",
+    "step_0_2": "> _ dsp: Analizando trama Modbus-RTU...",
+    "step_0_3": "> _ calc: Aplicando calibrador de hardware (x10.0)...",
+    "step_0_4": "> _ sys: [OK] Voltaje: 121.5V | Potencia Activa: 14.0W",
+    "step_1_0": "> _ ntp: Solicitando Epoch UTC a pool.ntp.org...",
+    "step_1_1": "> _ ntp: [OK] Timestamp: 2026-03-24T16:30:00.000Z",
+    "step_1_2": "> _ core: DeltaTime desde último ciclo: 300000 ms",
+    "step_1_3": "> _ core: Integrando Potencia -> Energía (Joules)...",
+    "step_1_4": "> _ sys: Ensamblando payload JSON:",
+    "step_1_5": "'{'\n  \"id_hardware\": \"A0:B7:65:DD:FE:12\",\n  \"timestamp\": \"2026-03-24T16:30:00.000Z\",\n  \"kwh_consumed\": 0.015\n'}'",
+    "step_2_0": "> _ http: Iniciando túnel SSL/TLS con Supabase...",
+    "step_2_1": "> _ http: POST /functions/v1/ingest",
+    "step_2_2": "> _ sys: Esperando respuesta...",
+    "step_2_3": "> _ err: [TIMEOUT] Conexión rechazada. Link Wi-Fi inestable.",
+    "step_2_4": "> _ sys: Activando bandera de contingencia (isOffline = true)",
+    "step_2_5": "> _ fs: Montando sistema de archivos SD_MMC...",
+    "step_2_6": "> _ fs: [OK] Appending a /data.csv",
+    "step_3_0": "> _ sys: Link Wi-Fi recuperado. Sincronizando pendientes...",
+    "step_3_1": "> _ fs: Leyendo /data.csv (1 paquete retenido)",
+    "step_3_2": "> _ http: POST /functions/v1/ingest",
+    "step_3_3": "> _ sys: [200 OK] Paquete insertado en public.lecturas_consumo",
+    "step_3_4": "> _ fs: Eliminando /data.csv para liberar NVS...",
+    "step_3_5": "> _ sys: [OK] Sincronización completa. Retornando a nominal."
+  },
+  "Breadcrumbs": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "projects": "Proyectos",
+    "blog": "Bitácora"
+  },
+  "About": {
+    "title": "Ingeniería de software con precisión de diseño.",
+    "subtitle": "Frontend Specialist / UI/UX Enthusiast",
+    "bio1": "Soy un desarrollador apasionado por la intersección exacta entre el diseño gráfico y la implementación técnica. Mi objetivo y visión a largo plazo es claro: construir y liderar el desarrollo de interfaces UI/UX de talla mundial, ya sea como contribuidor individual o arquitecto de equipo. No me conformo con que las cosas \"simplemente funcionen\"; creo firmemente que la estética, las micro-interacciones y el rendimiento absoluto son características fundamentales del producto.",
+    "bio2": "Mi estándar de calidad está profundamente influenciado por el rigor técnico de referentes como Rauno Freiberg, Vercel y Stripe, la dirección de arte inmersiva de Rockstar en GTA VI, los sistemas escalables de Once UI y el impecable scrollytelling de Apple. Esta constante exposición a la excelencia alimenta mis ganas de ser de los mejores, manteniendo una mentalidad de estudiante perpetuo, con bases sólidas y una determinación inquebrantable por seguir aprendiendo hasta lograrlo.",
+    "bio3": "Actualmente, canalizo esta energía en construir herramientas y ecosistemas digitales robustos. Cada línea de código que escribo es un paso más hacia la maestría técnica, buscando siempre ese balance perfecto donde la complejidad de la lógica de negocio se vuelve invisible gracias a una experiencia de usuario impecable, rápida y fluida.",
+    "trajectory": "Trayectoria",
+    "present": "Presente",
+    "powerlinkDesc": "Desarrollo de interfaces de alta fidelidad para el monitoreo de hardware IoT en tiempo real. Implementación de modelos 3D interactivos, arquitecturas modulares y visualización de topologías de red priorizando el rendimiento a 60fps."
+  },
+  "ProjectsPage": {
+    "title": "Proyectos y Sistemas",
+    "subtitle": "// REGISTRO DETALLADO DE PROYECTOS",
+    "startTerminal": "Iniciar_Terminal",
+    "backToGUI": "Volver_a_GUI"
+  },
+  "ProjectSlug": {
+    "status": "STATUS: ",
+    "waitingComponent": "Aguardando_Componente_Visual"
+  },
+  "Blog": {
+    "title": "Bitácora",
+    "subtitle": "// PENSAMIENTOS DE CIERVO",
+    "empty": "No hay entradas publicadas aún."
+  },
+  "PowerLink": {
+    "Hero": {
+      "firmware": "Firmware V8.0 Operativo",
+      "title": "El Origen Físico",
+      "description": "Un nodo Gateway basado en el ESP32-S3. Conectividad híbrida Wi-Fi/LoRa, memoria tolerante a fallos y procesamiento DSP directo en el borde de la red.",
+      "dragInstruction": "[Arrastra para inspeccionar]"
+    },
+    "ExecutiveSummary": {
+      "liveProject": "Ver Proyecto en Vivo",
+      "repository": "Ver Repositorio",
+      "problemTitle": "El Problema",
+      "problemDesc": "El consumo eléctrico es un gasto ciego. Las personas reciben facturas sin saber qué electrodoméstico drena su dinero, careciendo de herramientas para auditar su consumo o proteger sus equipos de variaciones.",
+      "solutionTitle": "Hacer visible lo invisible.",
+      "solutionDesc": "PowerLink transforma la red eléctrica en datos tangibles. Un ecosistema IoT de grado producción que mide, grafica y controla el consumo en tiempo real, permitiendo identificar dispositivos \"vampiro\" y operar cargas de alto voltaje globalmente.",
+      "metric1": "En Producción Activa",
+      "metric2": "Integración Nativa",
+      "metric3": "Estándares de Seguridad",
+      "metric4": "Arquitectura Serverless",
+      "ownershipTitle": "Ingeniería End-to-End",
+      "ownershipDesc": "\"PowerLink es una muestra de ingeniería de ciclo completo (Full-Cycle). Diseñé el hardware físico, programé el firmware en C++ para tolerar fallos de red, diseñé la base de datos relacional y construí esta interfaz web fluida. No solo escribo código; construyo sistemas que resuelven problemas reales.\"",
+      "impactTitle": "Impacto y ROI",
+      "impactDescIntro": "Más allá del software, la plataforma está diseñada para el ",
+      "impactDescBold": "Retorno de Inversión",
+      "impactDescOutro": ". Permite auditorías de energía preventivas, prolonga la vida útil de aparatos críticos.",
+      "bridge": "Descubre la arquitectura interna"
+    },
+    "Architecture": {
+      "waitingTelemetry": "Esperando telemetría... Selecciona un nodo.",
+      "badge": "Arquitectura V8.0",
+      "title": "Topología del Sistema",
+      "description": "Visualiza el flujo de datos End-to-End. Toca cualquier nodo en el diagrama para inspeccionar su rol específico.",
+      "tabEdge": "01. Capa Edge (Hardware)",
+      "tabCloud": "02. Capa Cloud (Backend)",
+      "nodes": {
+        "dsp": {
+          "title": "DSP PZEM004Tv30",
+          "description": "Procesador de Señales Digitales dedicado. Realiza el cálculo matemático pesado de la corriente RMS y la potencia activa por hardware, liberando al microcontrolador principal.",
+          "metrics": "Precisión: 99% | Muestreo: 1000Hz"
+        },
+        "mcu": {
+          "title": "ESP32-S3 Core",
+          "description": "Cerebro del nodo (Firmware V8.0). Ejecuta la lógica de integración de energía (Watts a Joules), controla los relés de alto voltaje y gestiona la persistencia de estado en memoria NVS.",
+          "metrics": "Dual-Core 240MHz | Watchdog Activo"
+        },
+        "comms": {
+          "title": "Redundancia Híbrida",
+          "description": "Módulo de contingencia. Si el enlace a internet se pierde, activa la bandera 'isOffline' y aplica un patrón Store-and-Forward reteniendo los payloads en una tarjeta MicroSD local.",
+          "metrics": "Protocolo: HTTP POST / WSS"
+        },
+        "ingest": {
+          "title": "Edge Functions",
+          "description": "Punto de ingesta serverless. Recibe las peticiones HTTP del hardware, autentica la MAC del dispositivo y previene inyecciones antes de escribir en la base de datos.",
+          "metrics": "Cold Start: < 10ms"
+        },
+        "db": {
+          "title": "PostgreSQL (Supabase)",
+          "description": "Almacenamiento relacional. Utiliza Change Data Capture (CDC) para emitir eventos de mutación instantáneos cuando un estado cambia, optimizado para series de tiempo.",
+          "metrics": "Consultas: < 50ms"
+        },
+        "client": {
+          "title": "App Router & Realtime",
+          "description": "Frontend bimodal. Se suscribe a los canales de Supabase Realtime para actualizar gráficas de consumo en vivo y emitir comandos de actuación (apagar/encender) sin recargar.",
+          "metrics": "Latencia UI: ~45ms"
+        }
+      }
+    },
+    "Ingest": {
+      "badge": "Versión 1.0",
+      "title": "El Motor de Ingesta",
+      "description": "Canalización asíncrona y almacenamiento de series temporales. Arquitectura resiliente desde el borde hasta la base de datos relacional, garantizando consistencia y cero pérdida de paquetes.",
+      "steps": {
+        "0": {
+          "title": "Interrogación Física",
+          "description": "El microcontrolador ESP32-S3 consulta directamente al DSP dedicado (PZEM004Tv30) vía UART. Se extrae la potencia activa y el voltaje con precisión de hardware, aplicando la calibración física para compensar el factor del transformador."
+        },
+        "1": {
+          "title": "Ensamblaje del Payload",
+          "description": "No podemos confiar en el tiempo de la nube. El firmware sincroniza su reloj interno contra pool.ntp.org. Luego, convierte los Watts instantáneos a Joules calculando el Delta Time exacto desde el último ciclo."
+        },
+        "2": {
+          "title": "Redundancia Store-and-Forward",
+          "description": "Si el enlace Wi-Fi cae o la API rechaza el paquete, el sistema no pierde telemetría. La bandera isOffline se activa y el payload se escribe de forma segura en un archivo CSV dentro de la MicroSD interna."
+        },
+        "3": {
+          "title": "Ingesta Hacia PostgreSQL",
+          "description": "Al recuperar la conexión, el sistema despacha los paquetes retenidos mediante un HTTP POST seguro hacia las Edge Functions de Supabase. Solo cuando la API responde con un 200 OK, la memoria temporal es liberada."
+        }
+      }
+    },
+    "Security": {
+      "badge": "Versión 1.0",
+      "title": "La Bóveda de Seguridad",
+      "description": "Defensa en profundidad (Defense-in-Depth). Estándares de seguridad implementados desde el nivel del silicio hasta las políticas de la base de datos relacional.",
+      "layer1": {
+        "title": "01. Seguridad en el Borde (Hardware)",
+        "subtitle": "Protección física y cifrado de memoria no volátil.",
+        "description": "Evitamos el anti-patrón de credenciales quemadas (hardcoded) en el código fuente. El ESP32 inicializa un punto de acceso (Access Point) temporal para la configuración inicial, guardando las credenciales de red de forma cifrada en la partición NVS (Non-Volatile Storage)."
+      },
+      "layer2": {
+        "title": "02. Capa de Transporte (Red)",
+        "subtitle": "Mitigación de ataques Man-in-the-Middle y Replay Attacks.",
+        "description": "Toda la telemetría saliente del dispositivo viaja exclusivamente a través de túneles TLS 1.2/1.3. La validación de certificados previene la suplantación de identidad del servidor. Los payloads incluyen un Timestamp (Epoch) y una firma criptográfica para rechazar paquetes repetidos maliciosamente (Replay Attacks)."
+      },
+      "layer3": {
+        "title": "03. Aplicación y Base de Datos (Cloud)",
+        "subtitle": "Control de acceso basado en roles y protección de inyecciones.",
+        "description": "El backend opera bajo el principio de privilegio mínimo. Se implementaron políticas estrictas de Row Level Security (RLS) en PostgreSQL; un usuario solo puede consultar y mutar los nodos que le pertenecen. Las sesiones se manejan mediante JWT firmados, y las rutas de Next.js están protegidas por middleware."
+      }
+    }
+  }
+}

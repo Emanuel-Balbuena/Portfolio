@@ -3,53 +3,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface TerminalStoryProps {
     step: number;
 }
 
-// Nuestro "Diccionario de Datos" con las trazas exactas basadas en tu arquitectura
-const TERMINAL_LOGS = [
-    // Paso 0: Interrogación Física
-    [
-        "> _ uart: TX -> F8 04 00 00 00 0A 64 64",
-        "> _ uart: RX <- F8 04 14 09 4B 00 00 00 8C 00 00 00 00 01 F4 00 64 00 00 00 00 E5",
-        "> _ dsp: Analizando trama Modbus-RTU...",
-        "> _ calc: Aplicando calibrador de hardware (x10.0)...",
-        "> _ sys: [OK] Voltaje: 121.5V | Potencia Activa: 14.0W"
-    ],
-    // Paso 1: Ensamblaje del Payload
-    [
-        "> _ ntp: Solicitando Epoch UTC a pool.ntp.org...",
-        "> _ ntp: [OK] Timestamp: 2026-03-24T16:30:00.000Z",
-        "> _ core: DeltaTime desde último ciclo: 300000 ms",
-        "> _ core: Integrando Potencia -> Energía (Joules)...",
-        "> _ sys: Ensamblando payload JSON:",
-        "{\n  \"id_hardware\": \"A0:B7:65:DD:FE:12\",\n  \"timestamp\": \"2026-03-24T16:30:00.000Z\",\n  \"kwh_consumed\": 0.015\n}"
-    ],
-    // Paso 2: Store-and-Forward
-    [
-        "> _ http: Iniciando túnel SSL/TLS con Supabase...",
-        "> _ http: POST /functions/v1/ingest",
-        "> _ sys: Esperando respuesta...",
-        "> _ err: [TIMEOUT] Conexión rechazada. Link Wi-Fi inestable.",
-        "> _ sys: Activando bandera de contingencia (isOffline = true)",
-        "> _ fs: Montando sistema de archivos SD_MMC...",
-        "> _ fs: [OK] Appending a /data.csv"
-    ],
-    // Paso 3: Ingesta Hacia PostgreSQL
-    [
-        "> _ sys: Link Wi-Fi recuperado. Sincronizando pendientes...",
-        "> _ fs: Leyendo /data.csv (1 paquete retenido)",
-        "> _ http: POST /functions/v1/ingest",
-        "> _ sys: [200 OK] Paquete insertado en public.lecturas_consumo",
-        "> _ fs: Eliminando /data.csv para liberar NVS...",
-        "> _ sys: [OK] Sincronización completa. Retornando a nominal."
-    ]
-];
-
 export function TerminalStory({ step }: TerminalStoryProps) {
     const [visibleLines, setVisibleLines] = useState<string[]>([]);
+    const t = useTranslations("TerminalStory");
 
     // Efecto de "Máquina de escribir" para las líneas
     useEffect(() => {
@@ -58,13 +20,21 @@ export function TerminalStory({ step }: TerminalStoryProps) {
 
         if (step === -1) {
             setVisibleLines([
-                "> _ sys: Inicializando módulo de telemetría...",
-                "> _ sys: [STANDBY] Esperando enlace de datos (Scroll hacia abajo para iniciar)..."
+                t("step_init_0"),
+                t("step_init_1")
             ]);
             return; // Detenemos la ejecución aquí para no buscar en el array
         }
 
-        const currentLogs = TERMINAL_LOGS[step] || [];
+        const getLogsForStep = (s: number) => {
+           if (s === 0) return [t("step_0_0"), t("step_0_1"), t("step_0_2"), t("step_0_3"), t("step_0_4")];
+           if (s === 1) return [t("step_1_0"), t("step_1_1"), t("step_1_2"), t("step_1_3"), t("step_1_4"), t("step_1_5")];
+           if (s === 2) return [t("step_2_0"), t("step_2_1"), t("step_2_2"), t("step_2_3"), t("step_2_4"), t("step_2_5"), t("step_2_6")];
+           if (s === 3) return [t("step_3_0"), t("step_3_1"), t("step_3_2"), t("step_3_3"), t("step_3_4"), t("step_3_5")];
+           return [];
+        };
+
+        const currentLogs = getLogsForStep(step);
         let timeouts: NodeJS.Timeout[] = [];
 
         // 2. Programamos la aparición de cada línea con un retraso progresivo
@@ -83,7 +53,7 @@ export function TerminalStory({ step }: TerminalStoryProps) {
         return () => {
             timeouts.forEach(clearTimeout);
         };
-    }, [step]); // Se vuelve a ejecutar cada vez que cambia el 'step'
+    }, [step, t]); // Se vuelve a ejecutar cada vez que cambia el 'step'
 
     return (
         <div className="w-full max-w-2xl h-[350px] md:h-[450px] flex flex-col rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#080808] shadow-2xl overflow-hidden font-mono text-sm text-slate-600 dark:text-slate-400">

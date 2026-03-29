@@ -1,4 +1,5 @@
 import { Code2, Cpu, Database, Layout, Server, ShieldCheck, Terminal } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 // Separación de datos: Fácil de escalar y mantener.
 const TECHNOLOGIES = [
@@ -13,11 +14,13 @@ const TECHNOLOGIES = [
 ];
 
 export function TechStack() {
+  const t = useTranslations("TechStack");
+
   return (
     <section className="w-full py-12 border-b border-border overflow-hidden bg-background">
       <div className="container px-4 md:px-6 mx-auto mb-8 text-center">
         <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest">
-          // Entornos y Tecnologías Dominadas
+          {t("heading")}
         </p>
       </div>
 

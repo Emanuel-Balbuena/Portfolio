@@ -1,33 +1,19 @@
 "use client"
 
 import {
-    FolderOpen,
-    Github,
-    Globe,
-    Home,
-    LinkIcon,
-    Linkedin,
-    Mail,
-    Monitor,
-    Search,
-    Settings,
-    User
+    FolderOpen, Github, Globe, Home, LinkIcon,
+    Linkedin, Mail, Monitor, Search, Settings, User
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
-    Command,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandSeparator,
-    CommandShortcut,
+    Command, CommandEmpty, CommandGroup, CommandInput,
+    CommandItem, CommandList, CommandSeparator, CommandShortcut,
 } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { PROJECTS } from "@/lib/projects";
@@ -35,9 +21,14 @@ import { PROJECTS } from "@/lib/projects";
 export function CommandMenu() {
     const [open, setOpen] = React.useState(false)
     const router = useRouter()
+    const pathname = usePathname() // Obtenemos la ruta actual (ej. /es/about)
     const { theme, setTheme } = useTheme()
     const [isCopied, setIsCopied] = React.useState(false);
     const email = "[EMAIL_ADDRESS]";
+
+    const t = useTranslations("CommandMenu");
+    const tProjects = useTranslations("Projects");
+    const locale = useLocale(); // Obtenemos el idioma actual (es o en)
 
     React.useEffect(() => {
         const down = (e: KeyboardEvent) => {
@@ -59,19 +50,25 @@ export function CommandMenu() {
         command()
     }
 
+    // Lógica para cambiar de idioma
+    const toggleLanguage = () => {
+        const nextLocale = locale === 'es' ? 'en' : 'es';
+        // Reemplazamos '/es' por '/en' en la ruta actual y navegamos
+        const newPathname = pathname.replace(`/${locale}`, `/${nextLocale}`);
+        router.push(newPathname);
+    }
+
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(email);
             setIsCopied(true);
-            // Utilizamos la variante .success de Sonner para una mejor UI
-            toast.success("Correo copiado al portapapeles", {
-                description: "¡Hablemos de tu próximo proyecto!",
+            toast.success(t("toastEmail"), {
+                description: t("toastEmailDesc"),
             });
-            // Restauramos el icono original después de 2 segundos
             setTimeout(() => setIsCopied(false), 2000);
         } catch (err) {
-            toast.error("Error de acceso", {
-                description: "No se pudo acceder al portapapeles. Intenta seleccionarlo manualmente.",
+            toast.error(t("toastError"), {
+                description: t("toastErrorDesc"),
             });
         }
     };
@@ -80,13 +77,13 @@ export function CommandMenu() {
         try {
             await navigator.clipboard.writeText(window.location.href);
             setIsCopied(true);
-            toast.success("Enlace copiado al portapapeles", {
-                description: "¡Listo para compartir!",
+            toast.success(t("toastLink"), {
+                description: t("toastLinkDesc"),
             });
             setTimeout(() => setIsCopied(false), 2000);
         } catch (err) {
-            toast.error("Error de acceso", {
-                description: "No se pudo acceder al portapapeles. Intenta seleccionarlo manualmente.",
+            toast.error(t("toastError"), {
+                description: t("toastErrorDesc"),
             });
         }
     };
@@ -99,8 +96,8 @@ export function CommandMenu() {
                 onClick={() => setOpen(true)}
             >
                 <Search className="mr-2 h-4 w-4" />
-                <span className="hidden lg:inline-flex">Buscar comandos...</span>
-                <span className="inline-flex lg:hidden">Buscar...</span>
+                <span className="hidden lg:inline-flex">{t("search")}</span>
+                <span className="inline-flex lg:hidden">{t("searchShort")}</span>
                 <kbd className="pointer-events-none absolute right-[0.3rem] top-[0.3rem] hidden h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
                     <span className="text-xs">⌘</span>K
                 </kbd>
@@ -121,40 +118,40 @@ export function CommandMenu() {
                     </DialogDescription>
 
                     <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
-                        <CommandInput placeholder="Escribe un comando o busca algo..." />
+                        <CommandInput placeholder={t("placeholder")} />
                         <CommandList className="font-sans">
-                            <CommandEmpty>No se encontraron resultados.</CommandEmpty>
+                            <CommandEmpty>{t("empty")}</CommandEmpty>
 
-                            <CommandGroup heading="Navegación">
+                            <CommandGroup heading={t("navHeading")}>
                                 <CommandItem onSelect={() => runCommand(() => router.push('/'))}>
                                     <Home className="mr-2 h-4 w-4" />
-                                    <span>Inicio</span>
+                                    <span>{t("navHome")}</span>
                                 </CommandItem>
                                 <CommandItem onSelect={() => runCommand(() => router.push('/about'))}>
                                     <User className="mr-2 h-4 w-4" />
-                                    <span>Sobre Mí</span>
+                                    <span>{t("navAbout")}</span>
                                 </CommandItem>
                                 <CommandItem onSelect={() => runCommand(() => router.push('/projects'))}>
                                     <FolderOpen className="mr-2 h-4 w-4" />
-                                    <span>Ver Proyectos</span>
+                                    <span>{t("navProjects")}</span>
                                 </CommandItem>
                             </CommandGroup>
                             <CommandSeparator />
 
-                            <CommandGroup heading="Acciones Rápidas">
+                            <CommandGroup heading={t("actionsHeading")}>
                                 <CommandItem onSelect={() => runCommand(() => handleCopy())}>
                                     <Mail className="mr-2 h-4 w-4" />
-                                    <span>Copiar Email</span>
+                                    <span>{t("actionEmail")}</span>
                                 </CommandItem>
                                 <CommandItem onSelect={() => runCommand(() => linkCopy())}>
                                     <LinkIcon className="mr-2 h-4 w-4" />
-                                    <span>Copiar Enlace Actual</span>
+                                    <span>{t("actionLink")}</span>
                                 </CommandItem>
                             </CommandGroup>
                             <CommandSeparator />
 
-                            <CommandGroup heading="Proyectos">
-                                {PROJECTS.map((project) => (
+                            <CommandGroup heading={t("projectsHeading")}>
+                                {PROJECTS[locale as "en" | "es"].map((project) => (
                                     <CommandItem key={project.id} onSelect={() => runCommand(() => router.push(`/projects/${project.name}`))}>
                                         <Monitor className="mr-2 h-4 w-4" />
                                         <span>{project.title}</span>
@@ -163,7 +160,7 @@ export function CommandMenu() {
                             </CommandGroup>
                             <CommandSeparator />
 
-                            <CommandGroup heading="Redes & Contacto">
+                            <CommandGroup heading={t("socialHeading")}>
                                 <CommandItem onSelect={() => runCommand(() => window.open('https://github.com/Emanuel-Balbuena', '_blank'))}>
                                     <Github className="mr-2 h-4 w-4" />
                                     <span>GitHub</span>
@@ -175,15 +172,16 @@ export function CommandMenu() {
                             </CommandGroup>
                             <CommandSeparator />
 
-                            <CommandGroup heading="Preferencias">
+                            <CommandGroup heading={t("preferencesHeading")}>
                                 <CommandItem onSelect={() => runCommand(() => setTheme(theme === "dark" ? "light" : "dark"))}>
                                     <Settings className="mr-2 h-4 w-4" />
-                                    <span>Alternar Tema</span>
+                                    <span>{t("themeToggle")}</span>
                                     <CommandShortcut>Alt+T</CommandShortcut>
                                 </CommandItem>
-                                <CommandItem onSelect={() => runCommand(() => toast("Multi-idioma (i18n) estará disponible próximamente."))} disabled>
-                                    <Globe className="mr-2 h-4 w-4 opacity-50" />
-                                    <span className="text-muted-foreground">Cambiar Idioma (Pronto)</span>
+                                {/* AQUÍ ESTÁ EL BOTÓN FUNCIONAL DE IDIOMA */}
+                                <CommandItem onSelect={() => runCommand(() => toggleLanguage())}>
+                                    <Globe className="mr-2 h-4 w-4" />
+                                    <span>{t("languageToggle")}</span>
                                 </CommandItem>
                             </CommandGroup>
 

@@ -11,24 +11,29 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { PROJECTS } from "@/lib/projects";
+import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+
 
 const projectComponents: Record<string, React.ComponentType> = {
     "PowerLink": PowerLinkDetail,
 };
 
 export async function generateStaticParams() {
-    return PROJECTS.map((project) => ({ slug: project.name }));
+    return PROJECTS.es.map((project) => ({ slug: project.name }));
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+    const locale = await getLocale() as "es" | "en";
     const { slug } = await params;
-    const project = PROJECTS.find((p) => p.name === slug);
+    const project = PROJECTS[locale].find((p) => p.name === slug);
 
     if (!project) notFound();
 
     const CustomProjectView = projectComponents[project.name];
+    const tBreadcrumbs = await getTranslations("Breadcrumbs");
 
     return (
         <main className="min-h-screen w-full bg-background flex flex-col items-center pt-24 pb-12 px-4 sm:px-8 relative">
@@ -43,13 +48,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             <BreadcrumbList className="font-mono text-sm">
                                 <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
-                                        <Link href="/">Home</Link>
+                                        <Link href="/">{tBreadcrumbs("home")}</Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
                                 <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
-                                        <Link href="/projects">Proyectos</Link>
+                                        <Link href="/projects">{tBreadcrumbs("projects")}</Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />

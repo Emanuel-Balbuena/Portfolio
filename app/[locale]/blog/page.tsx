@@ -8,9 +8,18 @@ import {
 } from "@/components/ui/breadcrumb";
 import { getAllPosts } from "@/lib/blog";
 import Link from "next/link";
+import { getTranslations, getLocale } from "next-intl/server";
+
+export const metadata = {
+    title: "Bitácora | Ciervo",
+    description: "Bitácora técnica.",
+};
 
 export default async function BlogPage() {
-    const posts = getAllPosts();
+    const activeLocale = await getLocale();
+    const posts = getAllPosts(activeLocale);
+    const tBreadcrumbs = await getTranslations("Breadcrumbs");
+    const t = await getTranslations("Blog");
 
     // ALTA INGENIERÍA: Agrupamos los posts por año antes de renderizar
     const postsByYear = posts.reduce((acc, post) => {
@@ -40,21 +49,21 @@ export default async function BlogPage() {
                             <BreadcrumbList className="font-mono text-sm">
                                 <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
-                                        <Link href="/">Home</Link>
+                                        <Link href="/">{tBreadcrumbs("home")}</Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
                                 <BreadcrumbItem>
-                                    <BreadcrumbPage>Bitácora</BreadcrumbPage>
+                                    <BreadcrumbPage>{tBreadcrumbs("blog")}</BreadcrumbPage>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
 
                         <h1 className="text-3xl md:text-4xl font-bold tracking-tight font-sans text-foreground">
-                            Bitácora.
+                            {t("title")}
                         </h1>
                         <p className="text-muted-foreground font-mono text-sm uppercase tracking-widest">
-                            // PENSAMIENTOS DE CIERVO
+                            {t("subtitle")}
                         </p>
                     </div>
                 </header>
@@ -63,7 +72,7 @@ export default async function BlogPage() {
                 <div className="flex flex-col">
                     {posts.length === 0 ? (
                         <div className="py-8 text-center font-mono text-sm text-muted-foreground">
-                            No hay entradas publicadas aún.
+                            {t("empty")}
                         </div>
                     ) : (
                         years.map((year) => (
@@ -90,8 +99,8 @@ export default async function BlogPage() {
                                             </h2>
                                             <div className="hidden sm:block flex-1 border-b border-border/40 mx-4 group-hover:border-foreground/20 transition-colors duration-300" />
                                             <time className="font-mono text-sm text-muted-foreground/60 shrink-0 group-hover:text-foreground/80 transition-colors duration-300 mt-1 sm:mt-0">
-                                                {/* Fecha en formato DD/MM */}
-                                                {new Date(post.date).toLocaleDateString("es-MX", {
+                                                {/* Fecha en formato DD/MM adaptable */}
+                                                {new Date(post.date).toLocaleDateString(activeLocale === "es" ? "es-MX" : "en-US", {
                                                     month: "2-digit",
                                                     day: "2-digit",
                                                 })}

@@ -11,8 +11,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Cpu, Fingerprint, GlobeLock, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function PowerLinkSecurity() {
+    const t = useTranslations("PowerLink.Security");
     return (
         <div className="flex flex-col w-full max-w-5xl mx-auto pt-0 pb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 
@@ -21,10 +23,10 @@ export function PowerLinkSecurity() {
                 <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-2 border border-amber-500/20">
                     <ShieldCheck className="w-6 h-6 text-amber-500" />
                 </div>
-                <p className="text-sm font-mono text-amber-500 uppercase tracking-widest">Versión 1.0</p>
-                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">La Bóveda de Seguridad</h2>
+                <p className="text-sm font-mono text-amber-500 uppercase tracking-widest">{t("badge")}</p>
+                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">{t("title")}</h2>
                 <p className="text-muted-foreground text-base max-w-2xl mt-2">
-                    Defensa en profundidad (Defense-in-Depth). Estándares de seguridad implementados desde el nivel del silicio hasta las políticas de la base de datos relacional.
+                    {t("description")}
                 </p>
             </div>
 
@@ -44,15 +46,15 @@ export function PowerLinkSecurity() {
                                         <Cpu className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="text-base font-semibold font-sans">01. Seguridad en el Borde (Hardware)</h4>
-                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">Protección física y cifrado de memoria no volátil.</p>
+                                        <h4 className="text-base font-semibold font-sans">{t("layer1.title")}</h4>
+                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">{t("layer1.subtitle")}</p>
                                     </div>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="pt-2 pb-6">
                                 <div className="pl-14 border-l-2 border-border ml-6 space-y-4">
                                     <p className="text-base text-muted-foreground leading-relaxed">
-                                        Evitamos el anti-patrón de credenciales quemadas (hardcoded) en el código fuente. El ESP32 inicializa un punto de acceso (Access Point) temporal para la configuración inicial, guardando las credenciales de red de forma cifrada en la partición NVS (Non-Volatile Storage).
+                                        {t("layer1.description")}
                                     </p>
                                     <div className="flex flex-wrap gap-2 mt-3">
                                         <Badge variant="outline" className="font-mono text-xs border-amber-500/20 text-amber-600 dark:text-amber-400">NVS Encryption</Badge>
@@ -71,15 +73,15 @@ export function PowerLinkSecurity() {
                                         <GlobeLock className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="text-base font-semibold font-sans">02. Capa de Transporte (Red)</h4>
-                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">Mitigación de ataques Man-in-the-Middle y Replay Attacks.</p>
+                                        <h4 className="text-base font-semibold font-sans">{t("layer2.title")}</h4>
+                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">{t("layer2.subtitle")}</p>
                                     </div>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="pt-2 pb-6">
                                 <div className="pl-14 border-l-2 border-border ml-6 space-y-4">
                                     <p className="text-base text-muted-foreground leading-relaxed">
-                                        Toda la telemetría saliente del dispositivo viaja exclusivamente a través de túneles TLS 1.2/1.3. La validación de certificados previene la suplantación de identidad del servidor. Los payloads incluyen un Timestamp (Epoch) y una firma criptográfica para rechazar paquetes repetidos maliciosamente (Replay Attacks).
+                                        {t("layer2.description")}
                                     </p>
                                     <div className="flex flex-wrap gap-2 mt-3">
                                         <Badge variant="outline" className="font-mono text-xs border-amber-500/20 text-amber-600 dark:text-amber-400">TLS 1.3</Badge>
@@ -98,15 +100,15 @@ export function PowerLinkSecurity() {
                                         <Fingerprint className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="text-base font-semibold font-sans">03. Aplicación y Base de Datos (Cloud)</h4>
-                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">Control de acceso basado en roles y protección de inyecciones.</p>
+                                        <h4 className="text-base font-semibold font-sans">{t("layer3.title")}</h4>
+                                        <p className="text-sm text-muted-foreground font-normal mt-0.5 hidden sm:block">{t("layer3.subtitle")}</p>
                                     </div>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="pt-2 pb-6">
                                 <div className="pl-14 border-l-2 border-border ml-6 space-y-4">
                                     <p className="text-base text-muted-foreground leading-relaxed">
-                                        El backend opera bajo el principio de privilegio mínimo. Se implementaron políticas estrictas de Row Level Security (RLS) en PostgreSQL; un usuario solo puede consultar y mutar los nodos que le pertenecen. Las sesiones se manejan mediante JWT firmados, y las rutas de Next.js están protegidas por middleware.
+                                        {t("layer3.description")}
                                     </p>
                                     <div className="flex flex-wrap gap-2 mt-3">
                                         <Badge variant="outline" className="font-mono text-xs border-amber-500/20 text-amber-600 dark:text-amber-400">PostgreSQL RLS</Badge>

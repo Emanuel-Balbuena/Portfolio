@@ -1,7 +1,12 @@
+// components/footer.tsx
+
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="w-full border-t border-border bg-background py-10">
       <div className="container px-4 md:px-6 mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -12,7 +17,7 @@ export function Footer() {
             <span>~/ciervo</span>
           </div>
           <p className="text-sm text-muted-foreground font-sans">
-            © {new Date().getFullYear()} Construido con precisión técnica. Todos los derechos reservados.
+            © {new Date().getFullYear()} {t("copyright")}
           </p>
         </div>
 

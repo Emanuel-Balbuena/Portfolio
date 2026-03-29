@@ -5,32 +5,34 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollStep } from "@/components/ui/scroll-step";
 import { Clock, Cpu, Database, WifiOff } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function IngestionLayout() {
     const [activeStep, setActiveStep] = useState(-1);
+    const t = useTranslations("PowerLink.Ingest");
 
     const NARRATIVE_STEPS = [
         {
-            title: "Interrogación Física",
-            description: "El microcontrolador ESP32-S3 consulta directamente al DSP dedicado (PZEM004Tv30) vía UART. Se extrae la potencia activa y el voltaje con precisión de hardware, aplicando la calibración física para compensar el factor del transformador.",
+            title: t("steps.0.title"),
+            description: t("steps.0.description"),
             icon: <Cpu className="w-5 h-5" />,
             tech: ["UART", "Modbus-RTU", "DSP"]
         },
         {
-            title: "Ensamblaje del Payload",
-            description: "No podemos confiar en el tiempo de la nube. El firmware sincroniza su reloj interno contra pool.ntp.org. Luego, convierte los Watts instantáneos a Joules calculando el Delta Time exacto desde el último ciclo.",
+            title: t("steps.1.title"),
+            description: t("steps.1.description"),
             icon: <Clock className="w-5 h-5" />,
             tech: ["NTP", "Epoch UTC", "C++ Math"]
         },
         {
-            title: "Redundancia Store-and-Forward",
-            description: "Si el enlace Wi-Fi cae o la API rechaza el paquete, el sistema no pierde telemetría. La bandera isOffline se activa y el payload se escribe de forma segura en un archivo CSV dentro de la MicroSD interna.",
+            title: t("steps.2.title"),
+            description: t("steps.2.description"),
             icon: <WifiOff className="w-5 h-5" />,
             tech: ["SD_MMC", "VFS", "Failover"]
         },
         {
-            title: "Ingesta Hacia PostgreSQL",
-            description: "Al recuperar la conexión, el sistema despacha los paquetes retenidos mediante un HTTP POST seguro hacia las Edge Functions de Supabase. Solo cuando la API responde con un 200 OK, la memoria temporal es liberada.",
+            title: t("steps.3.title"),
+            description: t("steps.3.description"),
             icon: <Database className="w-5 h-5" />,
             tech: ["Edge Functions", "REST API", "PostgreSQL"]
         }
@@ -45,10 +47,10 @@ export function IngestionLayout() {
                 <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center mb-2 border border-emerald-500/20">
                     <Database className="w-6 h-6 text-emerald-500" />
                 </div>
-                <p className="text-sm font-mono text-emerald-500 uppercase tracking-widest">Versión 1.0</p>
-                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">El Motor de Ingesta</h2>
+                <p className="text-sm font-mono text-emerald-500 uppercase tracking-widest">{t("badge")}</p>
+                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">{t("title")}</h2>
                 <p className="text-muted-foreground text-base max-w-2xl mt-2">
-                    Canalización asíncrona y almacenamiento de series temporales. Arquitectura resiliente desde el borde hasta la base de datos relacional, garantizando consistencia y cero pérdida de paquetes.
+                    {t("description")}
                 </p>
             </div>
 

@@ -1,3 +1,5 @@
+// components/connect.tsx
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -5,24 +7,26 @@ import { ArrowUpRight, Check, Copy, Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export function Connect() {
     const [isCopied, setIsCopied] = useState(false);
     const email = "[EMAIL_ADDRESS]";
+    const t = useTranslations("Connect");
 
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText(email);
             setIsCopied(true);
             // Utilizamos la variante .success de Sonner para una mejor UI
-            toast.success("Correo copiado al portapapeles", {
-                description: "¡Hablemos de tu próximo proyecto!",
+            toast.success(t("toastCopySuccess"), {
+                description: t("toastCopySuccessDesc"),
             });
             // Restauramos el icono original después de 2 segundos
             setTimeout(() => setIsCopied(false), 2000);
         } catch (err) {
-            toast.error("Error de acceso", {
-                description: "No se pudo acceder al portapapeles. Intenta seleccionarlo manualmente.",
+            toast.error(t("toastCopyError"), {
+                description: t("toastCopyErrorDesc"),
             });
         }
     };
@@ -39,10 +43,10 @@ export function Connect() {
 
                 <div className="space-y-4">
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight font-sans text-foreground">
-                        Iniciemos un sistema.
+                        {t("title")}
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-xl mx-auto font-sans">
-                        Siempre abierto a discutir nuevas arquitecturas, integraciones complejas o roles donde la ingeniería y el diseño convergen.
+                        {t("description")}
                     </p>
                 </div>
 
@@ -65,7 +69,7 @@ export function Connect() {
                         ) : (
                             <Copy className="size-4 mr-2" />
                         )}
-                        {isCopied ? "Copiado" : "Copiar"}
+                        {isCopied ? t("copiedBtn") : t("copyBtn")}
                     </Button>
                 </div>
 

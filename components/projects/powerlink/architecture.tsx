@@ -4,69 +4,78 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Cpu, Database, Globe, Microchip, MousePointerClick, Server, Wifi, Zap } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 // Tipado para nuestro estado nulo
-type NodeData = typeof ARCHITECTURE_DATA.edge[0];
-
-const ARCHITECTURE_DATA = {
-    edge: [
-        {
-            id: "dsp",
-            title: "DSP PZEM004Tv30",
-            icon: Microchip,
-            tech: "Hardware UART",
-            description: "Procesador de Señales Digitales dedicado. Realiza el cálculo matemático pesado de la corriente RMS y la potencia activa por hardware, liberando al microcontrolador principal.",
-            metrics: "Precisión: 99% | Muestreo: 1000Hz",
-        },
-        {
-            id: "mcu",
-            title: "ESP32-S3 Core",
-            icon: Cpu,
-            tech: "C++ / FreeRTOS",
-            description: "Cerebro del nodo (Firmware V8.0). Ejecuta la lógica de integración de energía (Watts a Joules), controla los relés de alto voltaje y gestiona la persistencia de estado en memoria NVS.",
-            metrics: "Dual-Core 240MHz | Watchdog Activo",
-        },
-        {
-            id: "comms",
-            title: "Redundancia Híbrida",
-            icon: Wifi,
-            tech: "Wi-Fi / SD_MMC",
-            description: "Módulo de contingencia. Si el enlace a internet se pierde, activa la bandera 'isOffline' y aplica un patrón Store-and-Forward reteniendo los payloads en una tarjeta MicroSD local.",
-            metrics: "Protocolo: HTTP POST / WSS",
-        }
-    ],
-    cloud: [
-        {
-            id: "ingest",
-            title: "Edge Functions",
-            icon: Server,
-            tech: "Deno / TypeScript",
-            description: "Punto de ingesta serverless. Recibe las peticiones HTTP del hardware, autentica la MAC del dispositivo y previene inyecciones antes de escribir en la base de datos.",
-            metrics: "Cold Start: < 10ms",
-        },
-        {
-            id: "db",
-            title: "PostgreSQL (Supabase)",
-            icon: Database,
-            tech: "Time-Series / CDC",
-            description: "Almacenamiento relacional. Utiliza Change Data Capture (CDC) para emitir eventos de mutación instantáneos cuando un estado cambia, optimizado para series de tiempo.",
-            metrics: "Consultas: < 50ms",
-        },
-        {
-            id: "client",
-            title: "App Router & Realtime",
-            icon: Globe,
-            tech: "Next.js / WebSockets",
-            description: "Frontend bimodal. Se suscribe a los canales de Supabase Realtime para actualizar gráficas de consumo en vivo y emitir comandos de actuación (apagar/encender) sin recargar.",
-            metrics: "Latencia UI: ~45ms",
-        }
-    ]
+type NodeData = {
+    id: string;
+    title: string;
+    icon: React.ElementType;
+    tech: string;
+    description: string;
+    metrics: string;
 };
 
 export function PowerLinkArchitecture() {
+    const t = useTranslations("PowerLink.Architecture");
     // 1. Solución UX: Inicializamos en NULL para forzar la interacción del usuario
     const [selectedEdgeNode, setSelectedEdgeNode] = useState<NodeData | null>(null);
     const [selectedCloudNode, setSelectedCloudNode] = useState<NodeData | null>(null);
+
+    const ARCHITECTURE_DATA = {
+        edge: [
+            {
+                id: "dsp",
+                title: t("nodes.dsp.title"),
+                icon: Microchip,
+                tech: "Hardware UART",
+                description: t("nodes.dsp.description"),
+                metrics: t("nodes.dsp.metrics"),
+            },
+            {
+                id: "mcu",
+                title: t("nodes.mcu.title"),
+                icon: Cpu,
+                tech: "C++ / FreeRTOS",
+                description: t("nodes.mcu.description"),
+                metrics: t("nodes.mcu.metrics"),
+            },
+            {
+                id: "comms",
+                title: t("nodes.comms.title"),
+                icon: Wifi,
+                tech: "Wi-Fi / SD_MMC",
+                description: t("nodes.comms.description"),
+                metrics: t("nodes.comms.metrics"),
+            }
+        ],
+        cloud: [
+            {
+                id: "ingest",
+                title: t("nodes.ingest.title"),
+                icon: Server,
+                tech: "Deno / TypeScript",
+                description: t("nodes.ingest.description"),
+                metrics: t("nodes.ingest.metrics"),
+            },
+            {
+                id: "db",
+                title: t("nodes.db.title"),
+                icon: Database,
+                tech: "Time-Series / CDC",
+                description: t("nodes.db.description"),
+                metrics: t("nodes.db.metrics"),
+            },
+            {
+                id: "client",
+                title: t("nodes.client.title"),
+                icon: Globe,
+                tech: "Next.js / WebSockets",
+                description: t("nodes.client.description"),
+                metrics: t("nodes.client.metrics"),
+            }
+        ]
+    };
 
     // Componente reutilizable para el Inspector (Evita código duplicado y maneja el estado NULL)
     const InspectorPanel = ({ node, colorTheme }: { node: NodeData | null, colorTheme: 'blue' | 'blue' }) => {
@@ -78,7 +87,7 @@ export function PowerLinkArchitecture() {
             return (
                 <div className="w-full h-[200px] md:h-[180px] bg-card/30 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center gap-3 animate-in fade-in duration-500">
                     <MousePointerClick className="w-6 h-6 text-muted-foreground/50 animate-bounce" />
-                    <p className="text-sm font-mono text-muted-foreground">Esperando telemetría... Selecciona un nodo.</p>
+                    <p className="text-sm font-mono text-muted-foreground">{t("waitingTelemetry")}</p>
                 </div>
             );
         }
@@ -117,10 +126,10 @@ export function PowerLinkArchitecture() {
                 <div className="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-2 border border-blue-500/20">
                     <Server className="w-6 h-6 text-blue-500" />
                 </div>
-                <p className="text-sm font-mono text-blue-500 uppercase tracking-widest">Arquitectura V8.0</p>
-                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">Topología del Sistema</h2>
+                <p className="text-sm font-mono text-blue-500 uppercase tracking-widest">{t("badge")}</p>
+                <h2 className="text-3xl font-bold tracking-tight font-sans text-foreground">{t("title")}</h2>
                 <p className="text-muted-foreground text-base max-w-2xl mt-2">
-                    Visualiza el flujo de datos End-to-End. Toca cualquier nodo en el diagrama para inspeccionar su rol específico.
+                    {t("description")}
                 </p>
             </div>
 
@@ -133,10 +142,10 @@ export function PowerLinkArchitecture() {
                     <TabsList className="bg-background border border-border inline-flex w-max">
                         {/* Reducimos el texto a text-[10px] en móvil y vuelve a text-xs en sm (tablets/PC) */}
                         <TabsTrigger value="edge" className="font-mono text-[10px] sm:text-xs uppercase tracking-wider px-3 sm:px-4">
-                            01. Capa Edge (Hardware)
+                            {t("tabEdge")}
                         </TabsTrigger>
                         <TabsTrigger value="cloud" className="font-mono text-[10px] sm:text-xs uppercase tracking-wider px-3 sm:px-4">
-                            02. Capa Cloud (Backend)
+                            {t("tabCloud")}
                         </TabsTrigger>
                     </TabsList>
                 </div>

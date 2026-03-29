@@ -16,7 +16,7 @@ export type BlogPost = {
 const blogDirectory = path.join(process.cwd(), "content/blog");
 
 // Función para obtener todos los posts (Ideal para la página /blog)
-export function getAllPosts(): BlogPost[] {
+export function getAllPosts(locale: string = "es"): BlogPost[] {
     // Verificamos si la carpeta existe, si no, devolvemos un array vacío
     if (!fs.existsSync(blogDirectory)) {
         return [];
@@ -25,10 +25,10 @@ export function getAllPosts(): BlogPost[] {
     const fileNames = fs.readdirSync(blogDirectory);
 
     const posts = fileNames
-        .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
+        .filter((fileName) => fileName.endsWith(`.${locale}.md`) || fileName.endsWith(`.${locale}.mdx`))
         .map((fileName) => {
-            // El 'slug' es el nombre del archivo sin la extensión (ej. 'terminal-simulada')
-            const slug = fileName.replace(/\.mdx?$/, "");
+            // El 'slug' es el nombre del archivo sin la extensión de idioma y formato (ej. 'terminal-simulada')
+            const slug = fileName.replace(new RegExp(`\\.${locale}\\.mdx?$`), "");
             const fullPath = path.join(blogDirectory, fileName);
             const fileContents = fs.readFileSync(fullPath, "utf8");
 
@@ -49,9 +49,9 @@ export function getAllPosts(): BlogPost[] {
 }
 
 // Función para obtener un solo post por su slug (Para la ruta dinámica /blog/[slug])
-export function getPostBySlug(slug: string): BlogPost | null {
+export function getPostBySlug(slug: string, locale: string = "es"): BlogPost | null {
     try {
-        const fullPath = path.join(blogDirectory, `${slug}.md`);
+        const fullPath = path.join(blogDirectory, `${slug}.${locale}.md`);
         const fileContents = fs.readFileSync(fullPath, "utf8");
         const { data, content } = matter(fileContents);
 

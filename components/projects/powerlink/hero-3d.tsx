@@ -4,6 +4,7 @@ import { Center, ContactShadows, Environment, Float, PresentationControls, useGL
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useTranslations } from "next-intl";
 
 // 1. EL MODELO BASE (Ahora recibe isMobile para cambiar su tamaño)
 function ESP32Model({ isMobile }: { isMobile: boolean }) {
@@ -50,6 +51,7 @@ useGLTF.preload("/models/esp32.glb");
 export function PowerLinkHero3D() {
     const globalMouse = useRef({ x: 0, y: 0 });
     const containerRef = useRef<HTMLDivElement>(null);
+    const t = useTranslations("PowerLink.Hero");
 
     // NUEVO ESTADO: Rastreadores de optimización e interfaz
     const [isVisible, setIsVisible] = useState(true);
@@ -99,13 +101,13 @@ export function PowerLinkHero3D() {
             <div className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-16 md:pt-20 pointer-events-none text-center px-4">
                 <div className="inline-flex items-center rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-mono font-medium text-blue-400 mb-4 backdrop-blur-md">
                     <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-pulse mr-2" />
-                    Firmware V8.0 Operativo
+                    {t("firmware")}
                 </div>
                 <h2 className="text-4xl md:text-6xl font-bold font-sans tracking-tighter mb-4 text-slate-900 dark:text-slate-100 drop-shadow-sm">
-                    El Origen Físico
+                    {t("title")}
                 </h2>
                 <p className="max-w-[600px] text-muted-foreground text-sm md:text-base leading-relaxed">
-                    Un nodo Gateway basado en el ESP32-S3. Conectividad híbrida Wi-Fi/LoRa, memoria tolerante a fallos y procesamiento DSP directo en el borde de la red.
+                    {t("description")}
                 </p>
             </div>
 
@@ -158,7 +160,7 @@ export function PowerLinkHero3D() {
             </div>
 
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden lg:flex items-center gap-2 text-xs font-mono text-muted-foreground/60 pointer-events-none">
-                <span>[Arrastra para inspeccionar]</span>
+                <span>{t("dragInstruction")}</span>
             </div>
         </div>
     );

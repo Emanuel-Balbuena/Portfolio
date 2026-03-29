@@ -11,6 +11,7 @@ import { Calendar } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getTranslations, getLocale } from "next-intl/server";
 
 interface PostPageProps {
     params: Promise<{
@@ -19,8 +20,9 @@ interface PostPageProps {
 }
 
 export async function generateMetadata({ params }: PostPageProps) {
+    const locale = await getLocale();
     const resolvedParams = await params;
-    const post = getPostBySlug(resolvedParams.slug);
+    const post = getPostBySlug(resolvedParams.slug, locale);
     if (!post) return { title: "Post no encontrado | ~/ciervo" };
 
     return {
@@ -30,12 +32,15 @@ export async function generateMetadata({ params }: PostPageProps) {
 }
 
 export default async function BlogPostPage({ params }: PostPageProps) {
+    const activeLocale = await getLocale();
     const resolvedParams = await params;
-    const post = getPostBySlug(resolvedParams.slug);
+    const post = getPostBySlug(resolvedParams.slug, activeLocale);
 
     if (!post) {
         notFound();
     }
+
+    const tBreadcrumbs = await getTranslations("Breadcrumbs");
 
     return (
         // Outer Wrapper: Esqueleto exacto de About
@@ -50,13 +55,13 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                             <BreadcrumbList className="font-mono text-sm">
                                 <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
-                                        <Link href="/">Home</Link>
+                                        <Link href="/">{tBreadcrumbs("home")}</Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
                                 <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
-                                        <Link href="/blog">Bitácora</Link>
+                                        <Link href="/blog">{tBreadcrumbs("blog")}</Link>
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
@@ -74,11 +79,11 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                         <div className="flex items-center gap-2 text-muted-foreground font-mono text-sm uppercase tracking-widest">
                             <Calendar className="size-4" />
                             <time>
-                                {new Date(post.date).toLocaleDateString("es-ES", {
+                                {new Date(post.date).toLocaleDateString(activeLocale === "es" ? "es-ES" : "en-US", {
                                     year: "numeric",
                                     month: "long",
                                     day: "numeric",
-                                })}
+                                }).replace(" de", "").replace(" de", " /")}
                             </time>
                         </div>
                     </div>

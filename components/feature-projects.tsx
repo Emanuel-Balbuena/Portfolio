@@ -4,47 +4,47 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useTranslations, useLocale } from "next-intl";
 // Importamos nuestros datos y tipos centralizados
 import { PROJECTS, SystemStatus } from "@/lib/projects";
 
-const STATUS_CONFIG: Record<SystemStatus, { label: string; className: string }> = {
+const STATUS_STYLE: Record<SystemStatus, { className: string }> = {
   production: {
-    label: "En Producción",
     className: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
   },
   maintenance: {
-    label: "Mantenimiento",
     className: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/20"
   },
   paused: {
-    label: "Pausado",
     className: "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400 border-zinc-500/20"
   },
   closed: {
-    label: "Cerrado",
     className: "bg-red-500/15 text-red-600 dark:text-red-400 border-red-500/20"
   },
 };
 
 export function FeaturedProjects() {
-  // Filtramos dinámicamente solo los proyectos destacados
-  const featuredProjects = PROJECTS.filter(project => project.featured);
+  const t = useTranslations("Projects");
+  const locale = useLocale() as "en" | "es";
+
+  const featuredProjects = PROJECTS[locale].filter(project => project.featured);
 
   return (
     <section className="w-full py-20 border-b border-border">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="mb-10 flex flex-col gap-2">
-          <h2 className="text-3xl font-bold tracking-tight font-sans">Sistemas Destacados</h2>
+          <h2 className="text-3xl font-bold tracking-tight font-sans">{t("heading")}</h2>
           <p className="text-muted-foreground font-mono text-sm">
-            // Seleccionados por complejidad técnica y arquitectura.
+            {t("subheading")}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
           {featuredProjects.map((project) => {
-            // Hacemos fallback a 'production' si por alguna razón un proyecto destacado no tiene status
-            const statusInfo = STATUS_CONFIG[project.status || "production"];
+            const statusKey = project.status || "production";
+            const statusStyle = STATUS_STYLE[statusKey];
+            const statusLabel = t(`status.${statusKey}`);
 
             return (
               <Link
@@ -82,10 +82,10 @@ export function FeaturedProjects() {
                         variant="outline"
                         className={cn(
                           "flex-shrink-0 font-mono text-xs font-normal border shadow-sm",
-                          statusInfo.className
+                          statusStyle.className
                         )}
                       >
-                        {statusInfo.label}
+                        {statusLabel}
                       </Badge>
                     </div>
 

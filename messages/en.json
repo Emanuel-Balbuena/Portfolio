@@ -1,0 +1,236 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "Navigation": {
+    "projects": "Projects",
+    "blog": "Logbook",
+    "about": "About me"
+  },
+  "CommandMenu": {
+    "search": "Search commands...",
+    "searchShort": "Search...",
+    "placeholder": "Type a command or search...",
+    "empty": "No results found.",
+    "navHeading": "Navigation",
+    "navHome": "Home",
+    "navAbout": "About Me",
+    "navProjects": "View Projects",
+    "actionsHeading": "Quick Actions",
+    "actionEmail": "Copy Email",
+    "actionLink": "Copy Current Link",
+    "projectsHeading": "Projects",
+    "socialHeading": "Socials & Contact",
+    "preferencesHeading": "Preferences",
+    "themeToggle": "Toggle Theme",
+    "languageToggle": "Cambiar a Español",
+    "toastEmail": "Email copied to clipboard",
+    "toastEmailDesc": "Let's talk about your next project!",
+    "toastLink": "Link copied to clipboard",
+    "toastLinkDesc": "Ready to share!",
+    "toastError": "Access Error",
+    "toastErrorDesc": "Could not access clipboard."
+  },
+  "Hero": {
+    "badgeRole": "Systems Engineering & Frontend",
+    "title1": "Architecture and code",
+    "title2": "with technical precision.",
+    "description": "I develop high-engineering interfaces and scalable systems. Prioritizing performance, accessibility, and bimodal design.",
+    "ctaExplore": "Explore Projects"
+  },
+  "Footer": {
+    "copyright": "Built with technical precision."
+  },
+  "Connect": {
+    "title": "Let's start a system.",
+    "description": "Always open to discuss new architectures, complex integrations or roles where engineering and design converge.",
+    "copyBtn": "Copy",
+    "copiedBtn": "Copied",
+    "toastCopySuccess": "Email copied to clipboard",
+    "toastCopySuccessDesc": "Let's talk about your next project!",
+    "toastCopyError": "Access Error",
+    "toastCopyErrorDesc": "Could not access clipboard. Try selecting manually."
+  },
+  "TechStack": {
+    "heading": "// Dominated Environments and Technologies"
+  },
+  "Projects": {
+    "heading": "Featured Systems",
+    "subheading": "// Selected for technical complexity and architecture.",
+    "status": {
+      "production": "In Production",
+      "maintenance": "Maintenance",
+      "paused": "Paused",
+      "closed": "Closed"
+    }
+  },
+  "TerminalStory": {
+    "step_init_0": "> _ sys: Initializing telemetry module...",
+    "step_init_1": "> _ sys: [STANDBY] Waiting for data link (Scroll down to start)...",
+    "step_0_0": "> _ uart: TX -> F8 04 00 00 00 0A 64 64",
+    "step_0_1": "> _ uart: RX <- F8 04 14 09 4B 00 00 00 8C 00 00 00 00 01 F4 00 64 00 00 00 00 E5",
+    "step_0_2": "> _ dsp: Analyzing Modbus-RTU frame...",
+    "step_0_3": "> _ calc: Applying hardware calibrator (x10.0)...",
+    "step_0_4": "> _ sys: [OK] Voltage: 121.5V | Active Power: 14.0W",
+    "step_1_0": "> _ ntp: Requesting UTC Epoch to pool.ntp.org...",
+    "step_1_1": "> _ ntp: [OK] Timestamp: 2026-03-24T16:30:00.000Z",
+    "step_1_2": "> _ core: DeltaTime since last cycle: 300000 ms",
+    "step_1_3": "> _ core: Integrating Power -> Energy (Joules)...",
+    "step_1_4": "> _ sys: Assembling JSON payload:",
+    "step_1_5": "'{'\n  \"id_hardware\": \"A0:B7:65:DD:FE:12\",\n  \"timestamp\": \"2026-03-24T16:30:00.000Z\",\n  \"kwh_consumed\": 0.015\n'}'",
+    "step_2_0": "> _ http: Starting SSL/TLS tunnel with Supabase...",
+    "step_2_1": "> _ http: POST /functions/v1/ingest",
+    "step_2_2": "> _ sys: Waiting for response...",
+    "step_2_3": "> _ err: [TIMEOUT] Connection refused. Unstable Wi-Fi link.",
+    "step_2_4": "> _ sys: Triggering contingency flag (isOffline = true)",
+    "step_2_5": "> _ fs: Mounting SD_MMC file system...",
+    "step_2_6": "> _ fs: [OK] Appending to /data.csv",
+    "step_3_0": "> _ sys: Wi-Fi link recovered. Synchronizing pending...",
+    "step_3_1": "> _ fs: Reading /data.csv (1 packet retained)",
+    "step_3_2": "> _ http: POST /functions/v1/ingest",
+    "step_3_3": "> _ sys: [200 OK] Packet inserted into public.lecturas_consumo",
+    "step_3_4": "> _ fs: Deleting /data.csv to free NVS...",
+    "step_3_5": "> _ sys: [OK] Synchronization complete. Returning to nominal."
+  },
+  "Breadcrumbs": {
+    "home": "Home",
+    "about": "About Me",
+    "projects": "Projects",
+    "blog": "Logbook"
+  },
+  "About": {
+    "title": "Software engineering with design precision.",
+    "subtitle": "Frontend Specialist / UI/UX Enthusiast",
+    "bio1": "I am a developer passionate about the exact intersection between graphic design and technical implementation. My goal and long-term vision is clear: build and lead the development of world-class UI/UX interfaces, whether as an individual contributor or team architect. I am not satisfied with things 'just working'; I firmly believe that aesthetics, micro-interactions, and absolute performance are fundamental product features.",
+    "bio2": "My quality standard is deeply influenced by the technical rigor of referents like Rauno Freiberg, Vercel and Stripe, the immersive art direction of Rockstar in GTA VI, the scalable systems of Once UI, and Apple's impeccable scrollytelling. This constant exposure to excellence feeds my desire to be among the best, maintaining a perpetual student mindset, with solid foundations and an unwavering determination to keep learning until I achieve it.",
+    "bio3": "Currently, I channel this energy into building robust digital tools and ecosystems. Every line of code I write is another step towards technical mastery, always seeking that perfect balance where business logic complexity becomes invisible thanks to an impeccable, fast, and fluid user experience.",
+    "trajectory": "Trajectory",
+    "present": "Present",
+    "powerlinkDesc": "Development of high-fidelity interfaces for real-time IoT hardware monitoring. Implementation of interactive 3D models, modular architectures, and network topology visualization prioritizing 60fps performance."
+  },
+  "ProjectsPage": {
+    "title": "Projects and Systems",
+    "subtitle": "// DETAILED PROJECT LOG",
+    "startTerminal": "Start_Terminal",
+    "backToGUI": "Back_to_GUI"
+  },
+  "ProjectSlug": {
+    "status": "STATUS: ",
+    "waitingComponent": "Waiting_Visual_Component"
+  },
+  "Blog": {
+    "title": "Logbook",
+    "subtitle": "// CIERVO'S THOUGHTS",
+    "empty": "No published entries yet."
+  },
+  "PowerLink": {
+    "Hero": {
+      "firmware": "Firmware V8.0 Operational",
+      "title": "The Physical Origin",
+      "description": "A Gateway node based on the ESP32-S3. Hybrid Wi-Fi/LoRa connectivity, fault-tolerant memory, and direct DSP processing at the network edge.",
+      "dragInstruction": "[Drag to inspect]"
+    },
+    "ExecutiveSummary": {
+      "liveProject": "View Live Project",
+      "repository": "View Repository",
+      "problemTitle": "The Problem",
+      "problemDesc": "Electricity consumption is a blind expense. People receive bills without knowing which appliance drains their money, lacking tools to audit their consumption or protect their equipment from variations.",
+      "solutionTitle": "Making the invisible visible.",
+      "solutionDesc": "PowerLink transforms the electrical grid into tangible data. A production-grade IoT ecosystem that measures, graphs, and controls consumption in real time, allowing for identifying \"vampire\" devices and operating high-voltage loads globally.",
+      "metric1": "In Active Production",
+      "metric2": "Native Integration",
+      "metric3": "Security Standards",
+      "metric4": "Serverless Architecture",
+      "ownershipTitle": "End-to-End Engineering",
+      "ownershipDesc": "\"PowerLink is a showcase of full-cycle engineering. I designed the physical hardware, programmed the C++ firmware to tolerate network failures, designed the relational database, and built this fluid web interface. I don't just write code; I build systems that solve real problems.\"",
+      "impactTitle": "Impact and ROI",
+      "impactDescIntro": "Beyond the software, the platform is designed for ",
+      "impactDescBold": "Return on Investment",
+      "impactDescOutro": ". It enables preventive energy audits, prolonging the lifespan of critical appliances.",
+      "bridge": "Discover the internal architecture"
+    },
+    "Architecture": {
+      "waitingTelemetry": "Waiting for telemetry... Select a node.",
+      "badge": "Architecture V8.0",
+      "title": "System Topology",
+      "description": "Visualize the End-to-End data flow. Tap any node in the diagram to inspect its specific role.",
+      "tabEdge": "01. Edge Layer (Hardware)",
+      "tabCloud": "02. Cloud Layer (Backend)",
+      "nodes": {
+        "dsp": {
+          "title": "DSP PZEM004Tv30",
+          "description": "Dedicated Digital Signal Processor. Performs heavy mathematical calculations of RMS current and active power by hardware, freeing the main microcontroller.",
+          "metrics": "Accuracy: 99% | Sampling: 1000Hz"
+        },
+        "mcu": {
+          "title": "ESP32-S3 Core",
+          "description": "Node brain (Firmware V8.0). Executes energy integration logic (Watts to Joules), controls high-voltage relays, and manages state persistence in NVS memory.",
+          "metrics": "Dual-Core 240MHz | Active Watchdog"
+        },
+        "comms": {
+          "title": "Hybrid Redundancy",
+          "description": "Contingency module. If the internet link is lost, it activates the 'isOffline' flag and applies a Store-and-Forward pattern retaining payloads on a local MicroSD card.",
+          "metrics": "Protocol: HTTP POST / WSS"
+        },
+        "ingest": {
+          "title": "Edge Functions",
+          "description": "Serverless ingestion point. Receives HTTP requests from hardware, authenticates device MAC, and prevents injections before writing to the database.",
+          "metrics": "Cold Start: < 10ms"
+        },
+        "db": {
+          "title": "PostgreSQL (Supabase)",
+          "description": "Relational storage. Uses Change Data Capture (CDC) to emit instant mutation events when a state changes, optimized for time series.",
+          "metrics": "Queries: < 50ms"
+        },
+        "client": {
+          "title": "App Router & Realtime",
+          "description": "Bimodal frontend. Subscribes to Supabase Realtime channels to update live consumption graphs and emit actuation commands (turn on/off) without reloading.",
+          "metrics": "UI Latency: ~45ms"
+        }
+      }
+    },
+    "Ingest": {
+      "badge": "Version 1.0",
+      "title": "The Ingestion Engine",
+      "description": "Asynchronous pipeline and time-series storage. Resilient architecture from the edge to the relational database, guaranteeing consistency and zero packet loss.",
+      "steps": {
+        "0": {
+          "title": "Physical Interrogation",
+          "description": "The ESP32-S3 microcontroller directly queries the dedicated DSP (PZEM004Tv30) via UART. Active power and voltage are extracted with hardware precision, applying physical calibration to compensate for the transformer factor."
+        },
+        "1": {
+          "title": "Payload Assembly",
+          "description": "We cannot trust cloud time. The firmware synchronizes its internal clock against pool.ntp.org. Then, it converts instantaneous Watts to Joules by calculating the exact Delta Time since the last cycle."
+        },
+        "2": {
+          "title": "Store-and-Forward Redundancy",
+          "description": "If the Wi-Fi link drops or the API rejects the packet, the system does not lose telemetry. The isOffline flag is activated and the payload is safely written to a CSV file inside the internal MicroSD."
+        },
+        "3": {
+          "title": "Ingestion To PostgreSQL",
+          "description": "Upon recovering the connection, the system dispatches the retained packets via a secure HTTP POST to Supabase Edge Functions. Only when the API responds with a 200 OK is the temporary memory freed."
+        }
+      }
+    },
+    "Security": {
+      "badge": "Version 1.0",
+      "title": "The Security Vault",
+      "description": "Defense-in-Depth. Security standards implemented from the silicon level to relational database policies.",
+      "layer1": {
+        "title": "01. Edge Security (Hardware)",
+        "subtitle": "Physical protection and non-volatile memory encryption.",
+        "description": "We avoid the anti-pattern of hardcoded credentials in the source code. The ESP32 initializes a temporary Access Point for initial setup, securely saving network credentials encrypted in the NVS (Non-Volatile Storage) partition."
+      },
+      "layer2": {
+        "title": "02. Transport Layer (Network)",
+        "subtitle": "Mitigation of Man-in-the-Middle and Replay Attacks.",
+        "description": "All outgoing device telemetry travels exclusively through TLS 1.2/1.3 tunnels. Certificate validation prevents server spoofing. Payloads include an Epoch Timestamp and a cryptographic signature to reject maliciously repeated packets (Replay Attacks)."
+      },
+      "layer3": {
+        "title": "03. Application and Database (Cloud)",
+        "subtitle": "Role-based access control and injection protection.",
+        "description": "The backend operates under the principle of least privilege. Strict Row Level Security (RLS) policies were implemented in PostgreSQL; a user can only query and mutate the nodes they own. Sessions are handled via signed JWTs, and Next.js routes are protected by middleware."
+      }
+    }
+  }
+}

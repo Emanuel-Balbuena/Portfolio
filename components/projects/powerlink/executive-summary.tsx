@@ -3,8 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Cpu, ExternalLink, Eye, Github, Layers, Mic, ShieldCheck, TrendingDown, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function PowerLinkExecutive() {
+    const t = useTranslations("PowerLink.ExecutiveSummary");
     return (
         <div className="flex flex-col w-full animate-in fade-in slide-in-from-bottom-4 duration-1000">
 
@@ -13,13 +15,13 @@ export function PowerLinkExecutive() {
                 <Button asChild size="lg" className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-900/20 transition-all hover:scale-105">
                     <a href="https://power-link-2.vercel.app" target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="w-4 h-4 mr-2" />
-                        Ver Proyecto en Vivo
+                        {t("liveProject")}
                     </a>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="border-border hover:bg-muted transition-all hover:scale-105">
                     <a href="https://github.com/Emanuel-Balbuena/PowerLink-2.git" target="_blank" rel="noopener noreferrer">
                         <Github className="w-4 h-4 mr-2" />
-                        Ver Repositorio
+                        {t("repository")}
                     </a>
                 </Button>
             </div>
@@ -41,11 +43,11 @@ export function PowerLinkExecutive() {
                                 <Zap className="w-5 h-5" />
                             </div>
                             <CardTitle className="font-sans text-xl group-hover:text-blue-400 transition-colors">
-                                El Problema
+                                {t("problemTitle")}
                             </CardTitle>
                             {/* Unificado a text-base y con un margin-top sutil */}
                             <CardDescription className="text-base text-muted-foreground leading-relaxed mt-2">
-                                El consumo eléctrico es un gasto ciego. Las personas reciben facturas sin saber qué electrodoméstico drena su dinero, careciendo de herramientas para auditar su consumo o proteger sus equipos de variaciones.
+                                {t("problemDesc")}
                             </CardDescription>
                         </CardHeader>
                     </Card>
@@ -64,10 +66,10 @@ export function PowerLinkExecutive() {
                                 <Eye className="w-5 h-5" />
                             </div>
                             <CardTitle className="font-sans text-xl font-bold tracking-tight group-hover:text-blue-400 transition-colors">
-                                Hacer visible lo invisible.
+                                {t("solutionTitle")}
                             </CardTitle>
                             <CardDescription className="text-base text-muted-foreground leading-relaxed max-w-xl mt-2">
-                                PowerLink transforma la red eléctrica en datos tangibles. Un ecosistema IoT de grado producción que mide, grafica y controla el consumo en tiempo real, permitiendo identificar dispositivos "vampiro" y operar cargas de alto voltaje globalmente.
+                                {t("solutionDesc")}
                             </CardDescription>
                         </CardHeader>
 
@@ -75,10 +77,10 @@ export function PowerLinkExecutive() {
                         <CardContent className="pt-0 pb-6 mt-auto">
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-border/50">
                                 {[
-                                    { icon: Cpu, label: "5 Nodos", desc: "En Producción Activa", color: "text-emerald-500" },
-                                    { icon: Mic, label: "Alexa", desc: "Integración Nativa", color: "text-blue-500" },
-                                    { icon: ShieldCheck, label: "OWASP", desc: "Estándares de Seguridad", color: "text-amber-500" },
-                                    { icon: Zap, label: "Escalable", desc: "Arquitectura Serverless", color: "text-purple-500" }
+                                    { icon: Cpu, label: "5 Nodos", desc: t("metric1"), color: "text-emerald-500" },
+                                    { icon: Mic, label: "Alexa", desc: t("metric2"), color: "text-blue-500" },
+                                    { icon: ShieldCheck, label: "OWASP", desc: t("metric3"), color: "text-amber-500" },
+                                    { icon: Zap, label: "Escalable", desc: t("metric4"), color: "text-purple-500" }
                                 ].map((item, i) => (
                                     <div key={i} className="flex flex-col gap-1 group/metric">
                                         <span className={`flex items-center gap-1.5 text-xs font-mono ${item.color} transition-transform group-hover/metric:translate-x-1`}>
@@ -105,11 +107,11 @@ export function PowerLinkExecutive() {
                                 <Layers className="w-5 h-5" />
                             </div>
                             <CardTitle className="font-sans text-xl group-hover:text-blue-400 transition-colors">
-                                Ingeniería End-to-End
+                                {t("ownershipTitle")}
                             </CardTitle>
                             {/* Unificado a text-base */}
                             <CardDescription className="text-base text-muted-foreground leading-relaxed italic border-l-2 border-transparent group-hover:border-blue-500/50 pl-4 transition-all duration-300 mt-2">
-                                "PowerLink es una muestra de ingeniería de ciclo completo (Full-Cycle). Diseñé el hardware físico, programé el firmware en C++ para tolerar fallos de red, diseñé la base de datos relacional y construí esta interfaz web fluida. No solo escribo código; construyo sistemas que resuelven problemas reales."
+                                {t("ownershipDesc")}
                             </CardDescription>
                         </CardHeader>
                     </Card>
@@ -128,11 +130,11 @@ export function PowerLinkExecutive() {
                                 <TrendingDown className="w-5 h-5" />
                             </div>
                             <CardTitle className="font-sans text-xl group-hover:text-blue-400 transition-colors">
-                                Impacto y ROI
+                                {t("impactTitle")}
                             </CardTitle>
                             {/* Unificado a text-base */}
                             <CardDescription className="text-base text-muted-foreground leading-relaxed mt-2">
-                                Más allá del software, la plataforma está diseñada para el <strong>Retorno de Inversión</strong>. Permite auditorías de energía preventivas, prolonga la vida útil de aparatos críticos.
+                                {t("impactDescIntro")}<strong>{t("impactDescBold")}</strong>{t("impactDescOutro")}
                             </CardDescription>
                         </CardHeader>
                     </Card>
@@ -142,7 +144,7 @@ export function PowerLinkExecutive() {
 
             {/* Puente hacia la Ingeniería */}
             <div className="flex flex-col items-center justify-center text-center mt-4 mb-8 opacity-80">
-                <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-2">Descubre la arquitectura interna</p>
+                <p className="text-sm font-mono text-muted-foreground uppercase tracking-widest mb-2">{t("bridge")}</p>
                 <div className="w-[2px] h-24 bg-gradient-to-b from-border to-transparent"></div>
             </div>
 

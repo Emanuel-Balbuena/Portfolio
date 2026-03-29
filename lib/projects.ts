@@ -16,49 +16,95 @@ export type Project = {
     featured?: boolean; // Flag para mostrarlo en la página principal
 };
 
-export const PROJECTS: Project[] = [
-    {
-        id: "prj-1",
-        name: "PowerLink",
-        title: "PowerLink",
-        desc: "Sistema de monitoreo eléctrico con ESP32 y sensores PZEM-004t.",
-        longDesc: "Ecosistema IoT domótico diseñado para mitigar el gasto energético oculto y predecir costos en tiempo real. Una arquitectura End-to-End que abarca desde el diseño de hardware (ESP32) y firmware resiliente en C++, hasta un dashboard serverless (Next.js/Supabase) con control global e integración nativa de voz vía Alexa.",
-        techStack: ["IoT", "Hardware", "Security"],
-        link: "https://github.com/Emanuel-Balbuena/PowerLink-2.git",
-        imageUrl: "/images/ft-powerlink.png",
-        status: "production",
-        featured: true, // <--- Este aparecerá en el inicio
-    }
+export const PROJECTS: Record<"en" | "es", Project[]> = {
+    es: [
+        {
+            id: "prj-1",
+            name: "PowerLink",
+            title: "PowerLink",
+            desc: "Sistema de monitoreo eléctrico con ESP32 y sensores PZEM-004t.",
+            longDesc: "Ecosistema IoT domótico diseñado para mitigar el gasto energético oculto y predecir costos en tiempo real. Una arquitectura End-to-End que abarca desde el diseño de hardware (ESP32) y firmware resiliente en C++, hasta un dashboard serverless (Next.js/Supabase) con control global e integración nativa de voz vía Alexa.",
+            techStack: ["IoT", "Hardware", "Security"],
+            link: "https://github.com/Emanuel-Balbuena/PowerLink-2.git",
+            imageUrl: "/images/ft-powerlink.png",
+            status: "production",
+            featured: true, // <--- Este aparecerá en el inicio
+        }
 
-    //Proyectos en proceso
-    /*{
-        id: "prj-2",
-        name: "arch-env",
-        title: "Arch Linux Setup",
-        desc: "Entorno de desarrollo de ultra bajo consumo y alta eficiencia.",
-        longDesc: "Configuración completa del sistema operativo utilizando Hyprland, Wayland, y scripts en Bash/Python para automatización del workflow. Integración de dotfiles personalizados.",
-        techStack: ["Linux", "SysAdmin", "Scripting"],
-        imageUrl: "/images/ft-hyprland.png",
-        status: "maintenance",
-        featured: true, // <--- Este también aparecerá en el inicio
-    },
-    {
-        id: "prj-3",
-        name: "ui-system",
-        title: "Librería de Componentes",
-        desc: "Librería de componentes React",
-        longDesc: "Sistema de diseño accesible y headless construido sobre Radix Primitives y Tailwind CSS.",
-        techStack: ["React", "TypeScript", "Tailwind", "Radix UI"],
-        status: "production",
-        // No tiene "featured: true", así que solo se verá en la página de proyectos / terminal
-    },
-    {
-        id: "prj-4",
-        name: "terminal-portfolio",
-        title: "Terminal CLI",
-        desc: "Interfaz basada en CLI",
-        longDesc: "Un portafolio interactivo que simula una terminal TTY completa con comandos, historial y autocompletado nativo.",
-        techStack: ["Next.js", "React", "Tailwind CSS"],
-        status: "production",
-    }*/
-];
+        // Proyectos en proceso para español
+        /*{
+            id: "prj-2",
+            name: "arch-env",
+            title: "Arch Linux Setup",
+            desc: "Entorno de desarrollo de ultra bajo consumo y alta eficiencia.",
+            longDesc: "Configuración completa del sistema operativo utilizando Hyprland, Wayland, y scripts en Bash/Python para automatización del workflow. Integración de dotfiles personalizados.",
+            techStack: ["Linux", "SysAdmin", "Scripting"],
+            imageUrl: "/images/ft-hyprland.png",
+            status: "maintenance",
+            featured: true, 
+        },
+        {
+            id: "prj-3",
+            name: "ui-system",
+            title: "Librería de Componentes",
+            desc: "Librería de componentes React",
+            longDesc: "Sistema de diseño accesible y headless construido sobre Radix Primitives y Tailwind CSS.",
+            techStack: ["React", "TypeScript", "Tailwind", "Radix UI"],
+            status: "production",
+        },
+        {
+            id: "prj-4",
+            name: "terminal-portfolio",
+            title: "Terminal CLI",
+            desc: "Interfaz basada en CLI",
+            longDesc: "Un portafolio interactivo que simula una terminal TTY completa con comandos, historial y autocompletado nativo.",
+            techStack: ["Next.js", "React", "Tailwind CSS"],
+            status: "production",
+        }*/
+    ],
+    en: [
+        {
+            id: "prj-1",
+            name: "PowerLink",
+            title: "PowerLink",
+            desc: "Electrical monitoring system with ESP32 and PZEM-004t sensors.",
+            longDesc: "A home automation IoT ecosystem designed to mitigate hidden energy waste and predict real-time costs. An End-to-End architecture ranging from hardware design (ESP32) and resilient C++ firmware to a serverless dashboard (Next.js/Supabase) with global control and native voice integration via Alexa.",
+            techStack: ["IoT", "Hardware", "Security"],
+            link: "https://github.com/Emanuel-Balbuena/PowerLink-2.git",
+            imageUrl: "/images/ft-powerlink.png",
+            status: "production",
+            featured: true,
+        }
+
+        // Proyectos en proceso para inglés
+        /*{
+            id: "prj-2",
+            name: "arch-env",
+            title: "Arch Linux Setup",
+            desc: "Ultra low-power and high-efficiency development environment.",
+            longDesc: "Complete operating system configuration using Hyprland, Wayland, and Bash/Python scripts for workflow automation. Integration of custom dotfiles.",
+            techStack: ["Linux", "SysAdmin", "Scripting"],
+            imageUrl: "/images/ft-hyprland.png",
+            status: "maintenance",
+            featured: true,
+        },
+        {
+            id: "prj-3",
+            name: "ui-system",
+            title: "Component Library",
+            desc: "React component library",
+            longDesc: "Accessible and headless design system built over Radix Primitives and Tailwind CSS.",
+            techStack: ["React", "TypeScript", "Tailwind", "Radix UI"],
+            status: "production",
+        },
+        {
+            id: "prj-4",
+            name: "terminal-portfolio",
+            title: "Terminal CLI",
+            desc: "CLI-based interface",
+            longDesc: "An interactive portfolio that simulates a complete TTY terminal with commands, history, and native auto-completion.",
+            techStack: ["Next.js", "React", "Tailwind CSS"],
+            status: "production",
+        }*/
+    ]
+};

@@ -7,6 +7,7 @@ import { PROJECTS, SystemStatus } from "@/lib/projects";
 import { ArrowRight, LayoutGrid, Terminal } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 // Importaciones de diseño consistentes con el inicio (shadcn/ui)
 import { Badge } from "@/components/ui/badge";
@@ -22,27 +23,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { cn } from "@/lib/utils";
 
 // Mapa de estados reutilizado para consistencia
-const STATUS_CONFIG: Record<SystemStatus, { label: string; className: string }> = {
+const STATUS_STYLE: Record<SystemStatus, { className: string }> = {
     production: {
-        label: "En Producción",
         className: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
     },
     maintenance: {
-        label: "Mantenimiento",
         className: "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/20"
     },
     paused: {
-        label: "Pausado",
         className: "bg-zinc-500/15 text-zinc-600 dark:text-zinc-400 border-zinc-500/20"
     },
     closed: {
-        label: "Cerrado",
         className: "bg-red-500/15 text-red-600 dark:text-red-400 border-red-500/20"
     },
 };
 
 export default function ProjectsPage() {
+    const locale = useLocale() as "es" | "en";
     const [view, setView] = useState<'grid' | 'terminal'>('grid');
+    const tBreadcrumbs = useTranslations("Breadcrumbs");
+    const t = useTranslations("ProjectsPage");
+    const tProjects = useTranslations("Projects");
 
     // NUEVO ESTADO: Para controlar el renderizado real de la Terminal vs su visibilidad
     const [isTerminalMounted, setIsTerminalMounted] = useState(false);
@@ -61,32 +62,33 @@ export default function ProjectsPage() {
                 setIsTerminalMounted(false);
             }, 400);
         }
-    };
+    }; // <--- SOLUCIÓN: Cerramos la función toggleView aquí.
 
+    // El return ahora pertenece correctamente al componente ProjectsPage
     return (
         <div className="min-h-screen w-full bg-background flex flex-col items-center pt-24 pb-12 px-4 sm:px-8 overflow-hidden relative">
 
             {/* INYECCIÓN DE ANIMACIONES CRT ESTILO RETRO (ON/OFF) */}
             <style dangerouslySetInnerHTML={{
                 __html: `
-                .crt-on {
-                    animation: crtOn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-                }
-                .crt-off {
-                    animation: crtOff 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-                }
-                @keyframes crtOn {
-                    0% { transform: scale(0.01, 0.005); opacity: 0; filter: brightness(10); }
-                    40% { transform: scale(1, 0.005); opacity: 1; filter: brightness(5); }
-                    100% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
-                }
-                /* Animación de colapso en un punto brillante */
-                @keyframes crtOff {
-                    0% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
-                    60% { transform: scale(1, 0.005); opacity: 1; filter: brightness(5); }
-                    100% { transform: scale(0.01, 0.005); opacity: 0; filter: brightness(10); }
-                }
-            `}} />
+            .crt-on {
+                animation: crtOn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            }
+            .crt-off {
+                animation: crtOff 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            }
+            @keyframes crtOn {
+                0% { transform: scale(0.01, 0.005); opacity: 0; filter: brightness(10); }
+                40% { transform: scale(1, 0.005); opacity: 1; filter: brightness(5); }
+                100% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
+            }
+            /* Animación de colapso en un punto brillante */
+            @keyframes crtOff {
+                0% { transform: scale(1, 1); opacity: 1; filter: brightness(1); }
+                60% { transform: scale(1, 0.005); opacity: 1; filter: brightness(5); }
+                100% { transform: scale(0.01, 0.005); opacity: 0; filter: brightness(10); }
+            }
+        `}} />
 
             {/* CABECERA Y CONTROLES */}
             <div className="w-full max-w-5xl flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-6 z-10">
@@ -97,22 +99,22 @@ export default function ProjectsPage() {
                             <BreadcrumbItem>
                                 {/* asChild delega el renderizado al Link de Next.js */}
                                 <BreadcrumbLink asChild>
-                                    <Link href="/">Home</Link>
+                                    <Link href="/">{tBreadcrumbs("home")}</Link>
                                 </BreadcrumbLink>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
-                                <BreadcrumbPage>Proyectos</BreadcrumbPage>
+                                <BreadcrumbPage>{tBreadcrumbs("projects")}</BreadcrumbPage>
                             </BreadcrumbItem>
                         </BreadcrumbList>
                     </Breadcrumb>
 
                     <div>
                         <h1 className="text-4xl font-bold font-sans tracking-tight text-slate-900 dark:text-slate-100 mb-2">
-                            Proyectos y Sistemas
+                            {t("title")}
                         </h1>
                         <p className="text-muted-foreground font-mono text-sm max-w-lg">
-                            // Un registro detallado de arquitecturas, experimentos y soluciones de ingeniería desarrolladas.
+                            {t("subtitle")}
                         </p>
                     </div>
                 </div>
@@ -125,12 +127,12 @@ export default function ProjectsPage() {
                     {view === 'grid' ? (
                         <>
                             <Terminal className="w-4 h-4" />
-                            <span>Iniciar_Terminal</span>
+                            <span>{t("startTerminal")}</span>
                         </>
                     ) : (
                         <>
                             <LayoutGrid className="w-4 h-4" />
-                            <span>Volver_a_GUI</span>
+                            <span>{t("backToGUI")}</span>
                         </>
                     )}
                 </button>
@@ -139,25 +141,26 @@ export default function ProjectsPage() {
             {/* CONTENEDOR PRINCIPAL */}
             <div className="w-full max-w-5xl relative">
 
-                {/* VISTA 1: LA LISTA DE PROYECTOS (ESTÉTICA CONSISTENTE, SIN IMAGEN) */}
+                {/* VISTA 1: LA LISTA DE PROYECTOS */}
                 <div
                     className={`flex flex-col gap-6 transition-all duration-700 absolute inset-0 w-full ${view === 'grid'
                         ? "opacity-100 translate-y-0 pointer-events-auto relative"
                         : "opacity-0 translate-y-8 pointer-events-none absolute"
                         }`}
                 >
-                    {PROJECTS.map((project) => {
-                        const statusInfo = STATUS_CONFIG[project.status || "production"];
+                    {PROJECTS[locale].map((project) => {
+                        const statusKey = project.status || "production";
+                        const statusStyle = STATUS_STYLE[statusKey];
+                        const statusLabel = tProjects(`status.${statusKey}`);
 
                         return (
                             <Link href={`/projects/${project.name}`} key={project.id} className="block relative group transition-all">
-                                {/* Brillo de fondo (Glow) consistente con el inicio */}
+                                {/* Brillo de fondo (Glow) */}
                                 <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100">
                                     <div className="absolute -top-10 -left-10 w-48 h-48 bg-blue-500/20 rounded-full blur-[100px]" />
                                     <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-orange-500/20 rounded-full blur-[100px]" />
                                 </div>
 
-                                {/* Usamos el componente Card de shadcn, SIN bloque de imagen */}
                                 <Card className="w-full bg-background border-border group-hover:border-foreground/20 transition-all duration-300 shadow-sm overflow-hidden relative group-hover:scale-[1.01] flex flex-col md:flex-row gap-0">
                                     <div className="flex-1 flex flex-col p-2">
                                         <CardHeader className="pt-5 pb-3">
@@ -168,8 +171,8 @@ export default function ProjectsPage() {
                                                         {project.title}
                                                     </CardTitle>
                                                 </div>
-                                                <Badge variant="outline" className={cn("flex-shrink-0 font-mono text-xs font-normal border shadow-sm", statusInfo.className)}>
-                                                    {statusInfo.label}
+                                                <Badge variant="outline" className={cn("flex-shrink-0 font-mono text-xs font-normal border shadow-sm", statusStyle.className)}>
+                                                    {statusLabel}
                                                 </Badge>
                                             </div>
                                             <CardDescription className="text-base text-muted-foreground leading-relaxed mt-2 max-w-4xl">
@@ -184,7 +187,6 @@ export default function ProjectsPage() {
                                                     </Badge>
                                                 ))}
                                             </div>
-                                            {/* Ícono visual de acción */}
                                             <div className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-400 group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-200 dark:group-hover:border-blue-500/30 transition-all group-hover:-rotate-45 shrink-0">
                                                 <ArrowRight className="w-5 h-5" />
                                             </div>
@@ -196,17 +198,13 @@ export default function ProjectsPage() {
                     })}
                 </div>
 
-                {/* VISTA 2: LA TERMINAL (Con desmontaje diferido para animación Off) */}
-                {/* origin-center es crucial para el colapso al punto */}
+                {/* VISTA 2: LA TERMINAL */}
                 <div
                     className={`w-full origin-center relative z-20 ${isTerminalMounted
                         ? (view === 'terminal' ? "crt-on pointer-events-auto" : "crt-off pointer-events-none absolute")
                         : "opacity-0 pointer-events-none hidden"
                         }`}
                 >
-                    {/* Solo renderizamos el componente si isTerminalMounted es true.
-                        Esto fuerza que el "Boot" sequence corra cada vez que se enciende la terminal, 
-                        arreglando el bug de tu última modificación. */}
                     {isTerminalMounted && <TerminalWindow />}
                 </div>
 
