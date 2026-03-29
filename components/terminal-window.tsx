@@ -4,6 +4,7 @@ import { PROJECTS, Project } from "@/lib/projects";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
 
 const BASE_COMMANDS = ["ls", "grep", "clear", "help", "cd", "mkdir", "pwd", "whoami", "date", "echo"];
 
@@ -36,6 +37,8 @@ const BOOT_SEQUENCE = [
 
 export function TerminalWindow() {
     const router = useRouter();
+    const rawLocale = useLocale();
+    const locale = (typeof rawLocale === "string" ? rawLocale : "es") as "en" | "es";
 
     // 1. --- ESTADOS ---
     const [cwd, setCwd] = useState<string>("~/projects");
@@ -66,7 +69,7 @@ export function TerminalWindow() {
         });
 
         if (path === "~/projects") {
-            PROJECTS.forEach(p => {
+            PROJECTS[locale].forEach(p => {
                 contents.push({ name: p.name, type: "executable", desc: p.desc, projectData: p });
             });
         }
