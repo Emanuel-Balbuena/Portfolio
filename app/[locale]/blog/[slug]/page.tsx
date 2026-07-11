@@ -11,6 +11,7 @@ import { Calendar } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { OrangeEffect } from "@/components/blog/orange-effect";
 import { getTranslations, getLocale } from "next-intl/server";
 
 interface PostPageProps {
@@ -45,6 +46,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     return (
         // Outer Wrapper: Esqueleto exacto de About
         <main className="w-full min-h-screen flex flex-col items-center px-4 sm:px-8 pt-24 pb-12">
+            {resolvedParams.slug === "color" && <OrangeEffect />}
             <article className="w-full max-w-5xl flex flex-col gap-10 md:gap-14">
 
                 {/* Encabezado: Esqueleto exacto de About */}

@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 
 export function Connect() {
     const [isCopied, setIsCopied] = useState(false);
-    const email = "[EMAIL_ADDRESS]";
+    const email = "emanuelbs2016@hotmail.com";
     const t = useTranslations("Connect");
 
     const handleCopy = async () => {

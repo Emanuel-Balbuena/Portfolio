@@ -16,6 +16,7 @@
     "navHome": "Inicio",
     "navAbout": "Sobre Mí",
     "navProjects": "Ver Proyectos",
+    "navBlog": "Bitácora",
     "actionsHeading": "Acciones Rápidas",
     "actionEmail": "Copiar Email",
     "actionLink": "Copiar Enlace Actual",
@@ -33,9 +34,9 @@
   },
   "Hero": {
     "badgeRole": "Ingeniería de Sistemas & Frontend",
-    "title1": "Arquitectura y código",
-    "title2": "con precisión técnica.",
-    "description": "Desarrollo interfaces de alta ingeniería y sistemas escalables. Priorizando rendimiento, accesibilidad y diseño bimodal.",
+    "title1": "Bienvenido soy",
+    "title2": "Emanuel Balbuena",
+    "description": "Desarrollador frontend apasionado por la tecnología y el diseño.",
     "ctaExplore": "Explorar Proyectos"
   },
   "Footer": {
@@ -232,5 +233,19 @@
         "description": "El backend opera bajo el principio de privilegio mínimo. Se implementaron políticas estrictas de Row Level Security (RLS) en PostgreSQL; un usuario solo puede consultar y mutar los nodos que le pertenecen. Las sesiones se manejan mediante JWT firmados, y las rutas de Next.js están protegidas por middleware."
       }
     }
+  },
+  "TerminalWindow": {
+    "skipBoot": "Presiona cualquier tecla para saltar la secuencia...",
+    "directory": "Directorio",
+    "executingBinary": "[OK] Ejecutando binario ./{name}\nRedirigiendo a interfaz gráfica (GUI)...",
+    "whoamiOutput": "guest (permisos restringidos)\nrol: visitante_prospecto",
+    "helpOutput": "Comandos disponibles:\n  cd [dir]   Cambiar de directorio\n  ls         Listar contenido\n  mkdir      Crear directorio\n  pwd        Ruta actual\n  clear      Limpiar terminal\n  whoami     Usuario actual\n  date       Fecha del sistema\n\nPara ejecutar un proyecto, navega a ~/projects y escribe su nombre."
+  },
+  "Navbar": {
+    "themeLight": "Claro",
+    "themeDark": "Oscuro",
+    "themeSystem": "Sistema",
+    "langEs": "Español",
+    "langEn": "English"
   }
 }

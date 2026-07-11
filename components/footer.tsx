@@ -1,11 +1,29 @@
 // components/footer.tsx
 
+"use client";
+
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 export function Footer() {
   const t = useTranslations("Footer");
+  const tConnect = useTranslations("Connect");
+  const email = "emanuelbs2016@hotmail.com";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      toast.success(tConnect("toastCopySuccess"), {
+        description: tConnect("toastCopySuccessDesc"),
+      });
+    } catch (err) {
+      toast.error(tConnect("toastCopyError"), {
+        description: tConnect("toastCopyErrorDesc"),
+      });
+    }
+  };
 
   return (
     <footer className="w-full border-t border-border bg-background py-10">
@@ -43,13 +61,13 @@ export function Footer() {
           >
             <Linkedin className="size-5" />
           </Link>
-          <Link
-            href="mailto:[EMAIL_ADDRESS]"
-            className="text-muted-foreground hover:text-orange-500 transition-colors p-2 hover:bg-muted rounded-md"
-            aria-label="Correo Electrónico"
+          <button
+            onClick={handleCopy}
+            className="text-muted-foreground hover:text-orange-500 transition-colors p-2 hover:bg-muted rounded-md cursor-pointer border-none bg-transparent"
+            aria-label="Copiar Correo Electrónico"
           >
             <Mail className="size-5" />
-          </Link>
+          </button>
         </div>
       </div>
     </footer>

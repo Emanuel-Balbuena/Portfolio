@@ -16,6 +16,7 @@
     "navHome": "Home",
     "navAbout": "About Me",
     "navProjects": "View Projects",
+    "navBlog": "Logbook",
     "actionsHeading": "Quick Actions",
     "actionEmail": "Copy Email",
     "actionLink": "Copy Current Link",
@@ -33,9 +34,9 @@
   },
   "Hero": {
     "badgeRole": "Systems Engineering & Frontend",
-    "title1": "Architecture and code",
-    "title2": "with technical precision.",
-    "description": "I develop high-engineering interfaces and scalable systems. Prioritizing performance, accessibility, and bimodal design.",
+    "title1": "Welcome I'm",
+    "title2": "Emanuel Balbuena",
+    "description": "Frontend developer passionate about technology and design.",
     "ctaExplore": "Explore Projects"
   },
   "Footer": {
@@ -232,5 +233,19 @@
         "description": "The backend operates under the principle of least privilege. Strict Row Level Security (RLS) policies were implemented in PostgreSQL; a user can only query and mutate the nodes they own. Sessions are handled via signed JWTs, and Next.js routes are protected by middleware."
       }
     }
+  },
+  "TerminalWindow": {
+    "skipBoot": "Press any key to skip sequence...",
+    "directory": "Directory",
+    "executingBinary": "[OK] Running binary ./{name}\nRedirecting to graphical user interface (GUI)...",
+    "whoamiOutput": "guest (restricted permissions)\nrole: prospect_visitor",
+    "helpOutput": "Available commands:\n  cd [dir]   Change directory\n  ls         List files\n  mkdir      Create directory\n  pwd        Print working directory\n  clear      Clear terminal\n  whoami     Current user\n  date       System date\n\nTo execute a project, navigate to ~/projects and type its name."
+  },
+  "Navbar": {
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "langEs": "Español",
+    "langEn": "English"
   }
 }

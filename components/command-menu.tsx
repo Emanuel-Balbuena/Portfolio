@@ -24,7 +24,22 @@ export function CommandMenu() {
     const pathname = usePathname() // Obtenemos la ruta actual (ej. /es/about)
     const { theme, setTheme } = useTheme()
     const [isCopied, setIsCopied] = React.useState(false);
-    const email = "[EMAIL_ADDRESS]";
+    const email = "emanuelbs2016@hotmail.com";
+
+    const changeTheme = React.useCallback((newTheme: string) => {
+        if (typeof window !== "undefined" && typeof document !== "undefined") {
+            const doc = document as unknown as { startViewTransition?: (callback: () => void) => void };
+            if (doc.startViewTransition) {
+                doc.startViewTransition(() => {
+                    setTheme(newTheme);
+                });
+            } else {
+                setTheme(newTheme);
+            }
+        } else {
+            setTheme(newTheme);
+        }
+    }, [setTheme]);
 
     const t = useTranslations("CommandMenu");
     const tProjects = useTranslations("Projects");
@@ -38,12 +53,12 @@ export function CommandMenu() {
             }
             if (e.key === "t" && e.altKey) {
                 e.preventDefault()
-                setTheme(theme === "dark" ? "light" : "dark")
+                changeTheme(theme === "dark" ? "light" : "dark")
             }
         }
         document.addEventListener("keydown", down)
         return () => document.removeEventListener("keydown", down)
-    }, [theme, setTheme])
+    }, [theme, changeTheme])
 
     const runCommand = (command: () => void) => {
         setOpen(false)
@@ -127,14 +142,19 @@ export function CommandMenu() {
                                     <Home className="mr-2 h-4 w-4" />
                                     <span>{t("navHome")}</span>
                                 </CommandItem>
-                                <CommandItem onSelect={() => runCommand(() => router.push('/about'))}>
-                                    <User className="mr-2 h-4 w-4" />
-                                    <span>{t("navAbout")}</span>
-                                </CommandItem>
                                 <CommandItem onSelect={() => runCommand(() => router.push('/projects'))}>
                                     <FolderOpen className="mr-2 h-4 w-4" />
                                     <span>{t("navProjects")}</span>
                                 </CommandItem>
+                                <CommandItem onSelect={() => runCommand(() => router.push('/blog'))}>
+                                    <FolderOpen className="mr-2 h-4 w-4" />
+                                    <span>{t("navBlog")}</span>
+                                </CommandItem>
+                                <CommandItem onSelect={() => runCommand(() => router.push('/about'))}>
+                                    <User className="mr-2 h-4 w-4" />
+                                    <span>{t("navAbout")}</span>
+                                </CommandItem>
+
                             </CommandGroup>
                             <CommandSeparator />
 
@@ -173,7 +193,7 @@ export function CommandMenu() {
                             <CommandSeparator />
 
                             <CommandGroup heading={t("preferencesHeading")}>
-                                <CommandItem onSelect={() => runCommand(() => setTheme(theme === "dark" ? "light" : "dark"))}>
+                                <CommandItem onSelect={() => runCommand(() => changeTheme(theme === "dark" ? "light" : "dark"))}>
                                     <Settings className="mr-2 h-4 w-4" />
                                     <span>{t("themeToggle")}</span>
                                     <CommandShortcut>Alt+T</CommandShortcut>

@@ -4,7 +4,7 @@ import { PROJECTS, Project } from "@/lib/projects";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useEffect, useRef, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const BASE_COMMANDS = ["ls", "grep", "clear", "help", "cd", "mkdir", "pwd", "whoami", "date", "echo"];
 
@@ -13,7 +13,7 @@ type HistoryEntry = {
     command: string;
     cwd: string;
     type: "files" | "error" | "text" | "system";
-    payload: any;
+    payload: string | FileSystemItem[];
 };
 
 type FileSystemItem = {
@@ -39,6 +39,7 @@ export function TerminalWindow() {
     const router = useRouter();
     const rawLocale = useLocale();
     const locale = (typeof rawLocale === "string" ? rawLocale : "es") as "en" | "es";
+    const t = useTranslations("TerminalWindow");
 
     // 1. --- ESTADOS ---
     const [cwd, setCwd] = useState<string>("~/projects");
@@ -63,7 +64,7 @@ export function TerminalWindow() {
             if (dir.startsWith(path) && dir !== path) {
                 const relativePath = dir.substring(path.length + (path === "~" ? 1 : 1));
                 if (!relativePath.includes("/")) {
-                    contents.push({ name: relativePath, type: "dir", desc: "Directorio" });
+                    contents.push({ name: relativePath, type: "dir", desc: t("directory") });
                 }
             }
         });
@@ -99,7 +100,7 @@ export function TerminalWindow() {
         const args = trimmedCmd.split(" ").filter(Boolean);
         const baseCmd = args[0].toLowerCase();
 
-        let newEntry: HistoryEntry = {
+        const newEntry: HistoryEntry = {
             id: Date.now(),
             command: trimmedCmd,
             cwd: activeCwd,
@@ -113,7 +114,7 @@ export function TerminalWindow() {
         if (projectMatch && projectMatch.projectData) {
             setIsRedirecting(true);
             newEntry.type = "system";
-            newEntry.payload = `[OK] Ejecutando binario ./${projectMatch.name}\nRedirigiendo a interfaz gráfica (GUI)...`;
+            newEntry.payload = t("executingBinary", { name: projectMatch.name });
             setTimeout(() => router.push(`/projects/${projectMatch.projectData?.name}`), 600);
         } else if (baseCmd === "clear") {
             setHistory([]);
@@ -123,7 +124,7 @@ export function TerminalWindow() {
             newEntry.payload = activeCwd.replace("~", "/home/guest");
         } else if (baseCmd === "whoami") {
             newEntry.type = "text";
-            newEntry.payload = "guest (permisos restringidos)\nrol: visitante_prospecto";
+            newEntry.payload = t("whoamiOutput");
         } else if (baseCmd === "date") {
             newEntry.type = "text";
             newEntry.payload = new Date().toString();
@@ -156,7 +157,7 @@ export function TerminalWindow() {
             }
         } else if (baseCmd === "help") {
             newEntry.type = "text";
-            newEntry.payload = `Comandos disponibles:\n  cd [dir]   Cambiar de directorio\n  ls         Listar contenido\n  mkdir      Crear directorio\n  pwd        Ruta actual\n  clear      Limpiar terminal\n  whoami     Usuario actual\n  date       Fecha del sistema\n\nPara ejecutar un proyecto, navega a ~/projects y escribe su nombre.`;
+            newEntry.payload = t("helpOutput");
         } else if (baseCmd === "ls") {
             newEntry.type = "files";
             newEntry.payload = getDirContents(activeCwd);
@@ -173,7 +174,7 @@ export function TerminalWindow() {
     useEffect(() => {
         if (!isBooting) return;
 
-        let timeouts: NodeJS.Timeout[] = [];
+        const timeouts: NodeJS.Timeout[] = [];
         const skipBoot = () => {
             timeouts.forEach(clearTimeout);
             setIsBooting(false);
@@ -295,7 +296,7 @@ export function TerminalWindow() {
                     <div className="w-3 h-5 bg-slate-600 dark:bg-slate-300 animate-pulse mt-1"></div>
                 </div>
                 <div className="mt-auto text-xs text-slate-400 dark:text-slate-600 text-center animate-pulse">
-                    Presiona cualquier tecla para saltar la secuencia...
+                    {t("skipBoot")}
                 </div>
             </div>
         );
@@ -303,9 +304,9 @@ export function TerminalWindow() {
 
     const renderOutput = (entry: HistoryEntry) => {
         if (entry.payload === "") return null;
-        if (entry.type === "error") return <div className="text-red-500 dark:text-red-400 mt-1">{entry.payload}</div>;
-        if (entry.type === "text") return <div className="text-slate-700 dark:text-slate-300 mt-1 whitespace-pre-wrap">{entry.payload}</div>;
-        if (entry.type === "system") return <div className="text-emerald-600 dark:text-emerald-400 mt-1 whitespace-pre-wrap animate-pulse">{entry.payload}</div>;
+        if (entry.type === "error") return <div className="text-red-500 dark:text-red-400 mt-1">{entry.payload as string}</div>;
+        if (entry.type === "text") return <div className="text-slate-700 dark:text-slate-300 mt-1 whitespace-pre-wrap">{entry.payload as string}</div>;
+        if (entry.type === "system") return <div className="text-emerald-600 dark:text-emerald-400 mt-1 whitespace-pre-wrap animate-pulse">{entry.payload as string}</div>;
         if (entry.type === "files") {
             const files = entry.payload as FileSystemItem[];
             if (files.length === 0) return null;

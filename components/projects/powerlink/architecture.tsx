@@ -16,6 +16,47 @@ type NodeData = {
     metrics: string;
 };
 
+// Componente reutilizable para el Inspector (Evita código duplicado y maneja el estado NULL)
+const InspectorPanel = ({ node, colorTheme, waitingTelemetry }: { node: NodeData | null, colorTheme: 'blue', waitingTelemetry: string }) => {
+    const themeConfig = {
+        blue: { border: "bg-blue-500", badge: "bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400", icon: "text-blue-500" },
+    };
+
+    if (!node) {
+        return (
+            <div className="w-full h-[200px] md:h-[180px] bg-card/30 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center gap-3 animate-in fade-in duration-500">
+                <MousePointerClick className="w-6 h-6 text-muted-foreground/50 animate-bounce" />
+                <p className="text-sm font-mono text-muted-foreground">{waitingTelemetry}</p>
+            </div>
+        );
+    }
+
+    const theme = themeConfig[colorTheme];
+
+    return (
+        <div className="w-full min-h-[200px] md:min-h-[180px] bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 items-start md:items-center shadow-sm relative overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+            <div className={`absolute left-0 top-0 bottom-0 w-1 ${theme.border}`}></div>
+            <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{node.title}</h3>
+                    <Badge variant="secondary" className={`font-mono text-xs ${theme.badge}`}>
+                        {node.tech}
+                    </Badge>
+                </div>
+                <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
+                    {node.description}
+                </p>
+            </div>
+            <div className="w-full md:w-auto flex items-center justify-start md:justify-center p-4 bg-white dark:bg-background border border-slate-200 dark:border-slate-800 rounded-xl shrink-0">
+                <div className="flex items-center gap-2 text-sm font-mono text-slate-700 dark:text-slate-300">
+                    <Zap className={`w-4 h-4 ${theme.icon}`} />
+                    {node.metrics}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export function PowerLinkArchitecture() {
     const t = useTranslations("PowerLink.Architecture");
     // 1. Solución UX: Inicializamos en NULL para forzar la interacción del usuario
@@ -77,46 +118,7 @@ export function PowerLinkArchitecture() {
         ]
     };
 
-    // Componente reutilizable para el Inspector (Evita código duplicado y maneja el estado NULL)
-    const InspectorPanel = ({ node, colorTheme }: { node: NodeData | null, colorTheme: 'blue' | 'blue' }) => {
-        const themeConfig = {
-            blue: { border: "bg-blue-500", badge: "bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-400", icon: "text-blue-500" },
-        };
 
-        if (!node) {
-            return (
-                <div className="w-full h-[200px] md:h-[180px] bg-card/30 border border-dashed border-border rounded-2xl flex flex-col items-center justify-center gap-3 animate-in fade-in duration-500">
-                    <MousePointerClick className="w-6 h-6 text-muted-foreground/50 animate-bounce" />
-                    <p className="text-sm font-mono text-muted-foreground">{t("waitingTelemetry")}</p>
-                </div>
-            );
-        }
-
-        const theme = themeConfig[colorTheme];
-
-        return (
-            <div className="w-full min-h-[200px] md:min-h-[180px] bg-slate-50 dark:bg-[#0a0a0a] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 items-start md:items-center shadow-sm relative overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className={`absolute left-0 top-0 bottom-0 w-1 ${theme.border}`}></div>
-                <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{node.title}</h3>
-                        <Badge variant="secondary" className={`font-mono text-xs ${theme.badge}`}>
-                            {node.tech}
-                        </Badge>
-                    </div>
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-sm md:text-base">
-                        {node.description}
-                    </p>
-                </div>
-                <div className="w-full md:w-auto flex items-center justify-start md:justify-center p-4 bg-white dark:bg-background border border-slate-200 dark:border-slate-800 rounded-xl shrink-0">
-                    <div className="flex items-center gap-2 text-sm font-mono text-slate-700 dark:text-slate-300">
-                        <Zap className={`w-4 h-4 ${theme.icon}`} />
-                        {node.metrics}
-                    </div>
-                </div>
-            </div>
-        );
-    };
 
     return (
         <div className="flex flex-col w-full max-w-5xl mx-auto pt-0 pb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -192,7 +194,7 @@ export function PowerLinkArchitecture() {
                         </div>
                     </div>
 
-                    <InspectorPanel node={selectedEdgeNode} colorTheme="blue" />
+                    <InspectorPanel node={selectedEdgeNode} colorTheme="blue" waitingTelemetry={t("waitingTelemetry")} />
                 </TabsContent>
 
                 {/* ========================================== */}
@@ -236,7 +238,7 @@ export function PowerLinkArchitecture() {
                         </div>
                     </div>
 
-                    <InspectorPanel node={selectedCloudNode} colorTheme="blue" />
+                    <InspectorPanel node={selectedCloudNode} colorTheme="blue" waitingTelemetry={t("waitingTelemetry")} />
                 </TabsContent>
             </Tabs>
         </div>

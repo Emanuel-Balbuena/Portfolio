@@ -16,9 +16,11 @@ export function TerminalStory({ step }: TerminalStoryProps) {
     // Efecto de "Máquina de escribir" para las líneas
     useEffect(() => {
         // 1. Limpiamos la terminal cuando cambiamos de paso
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setVisibleLines([]);
 
         if (step === -1) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setVisibleLines([
                 t("step_init_0"),
                 t("step_init_1")
@@ -35,7 +37,7 @@ export function TerminalStory({ step }: TerminalStoryProps) {
         };
 
         const currentLogs = getLogsForStep(step);
-        let timeouts: NodeJS.Timeout[] = [];
+        const timeouts: NodeJS.Timeout[] = [];
 
         // 2. Programamos la aparición de cada línea con un retraso progresivo
         currentLogs.forEach((line, index) => {
